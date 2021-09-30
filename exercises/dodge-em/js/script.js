@@ -1,11 +1,11 @@
 /**
-Dodge-em
+Exercise 2: Dodge-em
 Radhika Patel
 
 This is the second exercise in which conditionals (such as if statements and booleans), loops and mouse functions are epxlored.
 */
-//TO DO AT END : COMMIT, ADDREADME FILE, COMMENTS, CHANGE NUMSTATIC*************************************
 "use strict";
+//object that represents the player
 let user = {
   image: undefined,
   x: 0,
@@ -21,8 +21,10 @@ let user = {
   fill: 255,
 };
 
+//var that represents the amount of circles per frame generated
 let numStatic = 1;
 
+//object that represents that shell
 let shellImg = {
   image: undefined,
   x: 0,
@@ -34,6 +36,8 @@ let shellImg = {
   sizeY: 80,
   growth: 2,
 };
+
+//loads images
 function preload() {
   // SOURCE------- https://mariokart.fandom.com/wiki/Green_Shell
   shellImg.image = loadImage("assets/images/greenShell.png");
@@ -42,7 +46,7 @@ function preload() {
 }
 
 /**
-Description of setup
+Setups canvas and spawn the shell
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -53,7 +57,7 @@ function setup() {
 }
 
 /**
-Description of draw()
+Adds images, generates background, moves shell and player controls.
 */
 function draw() {
   background(255, 255, 255);
@@ -61,7 +65,7 @@ function draw() {
   image(shellImg.image, shellImg.x, shellImg.y, shellImg.sizeX, shellImg.sizeY);
   image(user.image, user.x, user.y, user.size, user.size);
 
-  //draw randoms squares in the background to hide the player
+  //draw randoms circles in the background
   for (let i = 0; i < numStatic; i++) {
     let x = random(0, width);
     let y = random(0, height);

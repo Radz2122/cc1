@@ -1,3 +1,6 @@
-# Template p5 project
+Radhika Patel
+Exercise 2: Dodge-em
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Description: In this exercise, I retook the in-class exercise and adapted to fit my idea. In this game, you can control your character with the arrow keys or with W,A,S,D.
+
+GOAL: Avoid the green shell. Be careful, it gets bigger when it's close!
