@@ -1,3 +1,4 @@
-# Template p5 project
+Exercise 3 : Love-actually
+Radhika Patel
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+In this project, the user (in pink) has to catch the person they like (white circle) before they get out of the canvas. They can use the arrows or WASD to move. However, the user cannot stop more than 3 times...

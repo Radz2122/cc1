@@ -81,7 +81,7 @@ function simulation() {
   checkOffscreen();
   checkOverlap();
   display();
-  alternateEnding();
+  checkAlternateEnding();
 }
 
 function love() {
@@ -105,7 +105,7 @@ function sadness() {
 function infinite(){
   push();
   textSize(45);
-  fill(150,150,255);
+  fill(255,40,40);
   textAlign(CENTER,CENTER);
   text(`Infinitely Separated `,width/2,height/6);
   pop();
@@ -154,6 +154,13 @@ function move() {
   circle2.y = circle2.y + circle2.vy;
 }
 
+//the ending that come son if the user stops 3 times
+function checkAlternateEnding(){
+  if(nbReleased===3){
+    state=`infinite`;
+  }
+}
+
 function checkOffscreen() {
   // Check if the circle has gone offscreen
   if (isOffscreen(circle2) && nbReleased<3) {
@@ -199,10 +206,4 @@ function keyReleased() {
   nbReleased++;
   user.vx = user.deceleration;
   user.vy = user.deceleration;
-}
-
-function alternateEnding(){
-  if(nbReleased===3){
-    state=`infinite`;
-  }
 }
