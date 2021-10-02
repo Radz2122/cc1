@@ -16,7 +16,7 @@ let user = {
   deceleration:0
 };
 
-let circle2 = {
+let otherPerson = {
   x: undefined,
   y: 250,
   size: 100,
@@ -25,28 +25,34 @@ let circle2 = {
   speed: 1
 };
 
-let state = `title`; // Can be: title, simulation, love, sadness
+//start off the simulation with the title
+let state = `title`;
+
+//the number of times the player stops
 let nbReleased=0;
 
+//setups canvas and circles
 function setup() {
   createCanvas(500,500);
   setupCircles();
 }
 
+//places the circles and moves them in a random direction at the start
 function setupCircles() {
   separateCircles();
   // Start circles moving in a random direction
   user.vx = random(-user.speed,user.speed);
   user.vy = random(-user.speed,user.speed);
-  circle2.vx = random(-circle2.speed,circle2.speed);
-  circle2.vy = random(-circle2.speed,circle2.speed);
+  otherPerson.vx = random(-otherPerson.speed,otherPerson.speed);
+  otherPerson.vy = random(-otherPerson.speed,otherPerson.speed);
 }
 function separateCircles(){
   // Position circles separated from one another
   user.x = width / 3;
-  circle2.x = 2 * width / 3;
+  otherPerson.x = 2 * width / 3;
 }
 
+//sets different states
 function draw() {
   background(0);
 
@@ -67,6 +73,7 @@ function draw() {
   }
 }
 
+//sets the title at the start
 function title() {
   push();
   textSize(64);
@@ -76,6 +83,7 @@ function title() {
   pop();
 }
 
+//to check state changes and to control mouvements
 function simulation() {
   move();
   checkOffscreen();
@@ -113,23 +121,24 @@ function infinite(){
   display();
 }
 
+//handles mouvements in the program : user controls and otherPerson mouvements
 function move() {
 
   //make the other circle move away form the user
-  let dx= circle2.x-user.x;
-  let dy=circle2.y-user.y;
+  let dx= otherPerson.x-user.x;
+  let dy=otherPerson.y-user.y;
 
   if(dx<0){
-    circle2.vx=-circle2.speed;
+    otherPerson.vx=-otherPerson.speed;
   }
   else if(dx>0){
-    circle2.vx=circle2.speed;
+    otherPerson.vx=otherPerson.speed;
   }
   if(dy<0){
-    circle2.vy=-circle2.speed;
+    otherPerson.vy=-otherPerson.speed;
   }
   else if(dy>0){
-    circle2.vy=circle2.speed;
+    otherPerson.vy=otherPerson.speed;
   }
 
 
@@ -150,11 +159,11 @@ function move() {
   user.x = user.x + user.vx;
   user.y = user.y + user.vy;
 
-  circle2.x = circle2.x + circle2.vx;
-  circle2.y = circle2.y + circle2.vy;
+  otherPerson.x = otherPerson.x + otherPerson.vx;
+  otherPerson.y = otherPerson.y + otherPerson.vy;
 }
 
-//the ending that come son if the user stops 3 times
+//the ending that comes on if the user stops 3 times
 function checkAlternateEnding(){
   if(nbReleased===3){
     state=`infinite`;
@@ -162,11 +171,11 @@ function checkAlternateEnding(){
 }
 
 function checkOffscreen() {
-  // Check if the circle has gone offscreen
-  if (isOffscreen(circle2) && nbReleased<3) {
+  // Check if the circle has gone offscreen and the number of times the player stopped (to avoid bugs)
+  if (isOffscreen(otherPerson) && nbReleased<3) {
     state = `sadness`;
   }
-  else if (isOffscreen(circle2) && nbReleased>=3){
+  else if (isOffscreen(otherPerson) && nbReleased>=3){
     state=`infinite`;
   }
 }
@@ -182,8 +191,8 @@ function isOffscreen(circle) {
 
 function checkOverlap() {
   // Check if the circles overlap
-  let d = dist(user.x,user.y,circle2.x,circle2.y);
-  if (d < user.size/2 + circle2.size/2) {
+  let d = dist(user.x,user.y,otherPerson.x,otherPerson.y);
+  if (d < user.size/2 + otherPerson.size/2) {
     state = `love`;
   }
 }
@@ -193,14 +202,16 @@ function display() {
   fill(255,192,203);
   ellipse(user.x,user.y,user.size);
   fill(255);
-  ellipse(circle2.x,circle2.y,circle2.size);
+  ellipse(otherPerson.x,otherPerson.y,otherPerson.size);
 }
 
+//checks if the player clicked during the title screen to start
 function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
   }
 }
+
 //function that stops the users mouvement if they release their key
 function keyReleased() {
   nbReleased++;
