@@ -2,7 +2,7 @@
 Exercise 3: Love-actually
 Radhika Patel
 
-This exercise explores if-statements, loops,functions,parameters and states
+This exercise explores if-statements,functions,parameters and states
 */
 
 let user = {
@@ -34,15 +34,17 @@ function setup() {
 }
 
 function setupCircles() {
-  // Position circles separated from one another
-  user.x = width / 3;
-  circle2.x = 2 * width / 3;
-
+  separateCircles();
   // Start circles moving in a random direction
   user.vx = random(-user.speed,user.speed);
   user.vy = random(-user.speed,user.speed);
   circle2.vx = random(-circle2.speed,circle2.speed);
   circle2.vy = random(-circle2.speed,circle2.speed);
+}
+function separateCircles(){
+  // Position circles separated from one another
+  user.x = width / 3;
+  circle2.x = 2 * width / 3;
 }
 
 function draw() {
@@ -60,8 +62,8 @@ function draw() {
   else if (state === `sadness`) {
     sadness();
   }
-  else if (state ===`infiniteTime`){
-    infiniteTime();
+  else if (state ===`infinite`){
+    infinite();
   }
 }
 
@@ -79,7 +81,7 @@ function simulation() {
   checkOffscreen();
   checkOverlap();
   display();
-  verifyEasterEgg();
+  alternateEnding();
 }
 
 function love() {
@@ -94,10 +96,21 @@ function love() {
 function sadness() {
   push();
   textSize(64);
+  fill(10,50,230);
+  textAlign(CENTER,CENTER);
+  text(`Try again`,width/2,height/2);
+  pop();
+}
+
+function infinite(){
+  push();
+  textSize(45);
   fill(150,150,255);
   textAlign(CENTER,CENTER);
-  text(`:(`,width/2,height/2);
+  text(`Infinitely Separated `,width/2,height/6);
   pop();
+  separateCircles();
+  display();
 }
 
 function move() {
@@ -140,21 +153,14 @@ function move() {
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
 }
-function infiniteTime(){
-  push();
-  textSize(64);
-  fill(150,150,255);
-  textAlign(CENTER,CENTER);
-  text(`infinite`,width/2,height/2);
-  pop();
-}
+
 function checkOffscreen() {
   // Check if the circle has gone offscreen
   if (isOffscreen(circle2) && nbReleased<3) {
     state = `sadness`;
   }
   else if (isOffscreen(circle2) && nbReleased>=3){
-    state=`infiniteTime`;
+    state=`infinite`;
   }
 }
 
@@ -188,7 +194,6 @@ function mousePressed() {
     state = `simulation`;
   }
 }
-
 //function that stops the users mouvement if they release their key
 function keyReleased() {
   nbReleased++;
@@ -196,8 +201,8 @@ function keyReleased() {
   user.vy = user.deceleration;
 }
 
-function verifyEasterEgg(){
+function alternateEnding(){
   if(nbReleased===3){
-    state=`infiniteTime`;
+    state=`infinite`;
   }
 }
