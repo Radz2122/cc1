@@ -1,9 +1,8 @@
 /**
-Title of Project
-Author Name
+The Age of Aquariums
+Radhika Patel
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This exercise helps explore arrays and for loops.
 */
 
 "use strict";
