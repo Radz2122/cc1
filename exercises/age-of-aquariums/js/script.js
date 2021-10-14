@@ -40,7 +40,7 @@ function setup() {
   player.y = random(0, height);
   player.x = random(5,100);
   for (let i = 0; i < schoolSize; i++) {
-    let fish= createFish(random(0,width), random(0,height));
+    let fish= createFish(random(0,width), random(0,height),random(0,5));
     school.push(fish);
   }
   for (let i = 0; i < boltSize; i++) {
@@ -50,14 +50,14 @@ function setup() {
 
 }
 
-function createFish(x,y){
+function createFish(x,y,speed){
   let fish={
     x:x,
     y:y,
     size:40,
     vx:0,
     vy:0,
-    speed:2
+    speed:speed
   };
   return fish;
 }
