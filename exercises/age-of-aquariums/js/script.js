@@ -8,8 +8,9 @@ This exercise helps explore arrays and for loops.
 "use strict";
 
 let school=[];
+let bolts=[];
 let schoolSize=6;
-
+let boltSize=3;
 let player={
   image: undefined,
   x:0,
@@ -42,6 +43,11 @@ function setup() {
     let fish= createFish(random(0,width), random(0,height));
     school.push(fish);
   }
+  for (let i = 0; i < boltSize; i++) {
+    let bolt= createBolt(random(0,width), random(0,height));
+    bolts.push(bolt);
+  }
+
 }
 
 function createFish(x,y){
@@ -54,6 +60,15 @@ function createFish(x,y){
     speed:2
   };
   return fish;
+}
+
+function createBolt(x,y){
+  let bolt={
+    x:x,
+    y:y,
+    size:25
+  };
+  return bolt;
 }
 
 
@@ -69,6 +84,9 @@ function draw() {
     displayFish(school[i]);
   }
 
+  for (let i = 0; i < bolts.length; i++) {
+    displayBolt(bolts[i]);
+  }
   //user commands
   //user can use ARROWS or WASD on keyboard
   if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
@@ -115,6 +133,14 @@ function displayFish(fish){
   fill(200,100,100);
   noStroke();
   ellipse(fish.x,fish.y,fish.size);
+  pop();
+}
+function displayBolt(bolt){
+
+  push();
+    fill(250,200,0)
+  noStroke();
+  ellipse(bolt.x,bolt.y,bolt.size);
   pop();
 }
 //functtion that stops the users mouvement if they release their key
