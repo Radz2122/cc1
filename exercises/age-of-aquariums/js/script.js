@@ -11,6 +11,7 @@ let school=[];
 let bolts=[];
 let schoolSize=6;
 let boltSize=3;
+
 let player={
   image: undefined,
   x:0,
@@ -66,7 +67,9 @@ function createBolt(x,y){
   let bolt={
     x:x,
     y:y,
-    size:25
+    size:25,
+    growth: 2,
+    touched:false
   };
   return bolt;
 }
@@ -78,6 +81,7 @@ Description of draw()
 function draw() {
   background(0);
   imageMode(CENTER);
+
   image(player.image, player.x, player.y, player.sizeX, player.sizeY);
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
@@ -86,6 +90,7 @@ function draw() {
 
   for (let i = 0; i < bolts.length; i++) {
     displayBolt(bolts[i]);
+    checkBolts(bolts[i]);
   }
   //user commands
   //user can use ARROWS or WASD on keyboard
@@ -109,6 +114,8 @@ function draw() {
   player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
   player.x += player.vx;
   player.y += player.vy;
+
+
 }
 
 function moveFish(fish){
@@ -136,12 +143,25 @@ function displayFish(fish){
   pop();
 }
 function displayBolt(bolt){
-
-  push();
+  if(!bolt.touched){
+    push();
     fill(250,200,0)
-  noStroke();
-  ellipse(bolt.x,bolt.y,bolt.size);
-  pop();
+    noStroke();
+    ellipse(bolt.x,bolt.y,bolt.size);
+    pop();
+  }
+
+}
+
+function checkBolts(bolt){
+  if(!bolt.touched){
+  //stop the program loop if the player touches a spark
+    let d = dist(player.x, player.y, bolt.x, bolt.y);
+
+    if (d< player.sizeX/2+bolt.size/2) {
+    bolt.touched=true;
+    }
+  }
 }
 //functtion that stops the users mouvement if they release their key
 function keyReleased() {
