@@ -11,7 +11,7 @@ let school=[];
 let bolts=[];
 let schoolSize=6;
 let boltSize=3;
-
+let score=0;
 let player={
   image: undefined,
   x:0,
@@ -68,7 +68,7 @@ function createBolt(x,y){
     x:x,
     y:y,
     size:25,
-    growth: 2,
+    score: 0,
     touched:false
   };
   return bolt;
@@ -92,6 +92,7 @@ function draw() {
     displayBolt(bolts[i]);
     checkBolts(bolts[i]);
   }
+
   //user commands
   //user can use ARROWS or WASD on keyboard
   if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
@@ -160,6 +161,8 @@ function checkBolts(bolt){
 
     if (d< player.sizeX/2+bolt.size/2) {
     bolt.touched=true;
+    score+=1;
+    console.log(score);
     }
   }
 }
