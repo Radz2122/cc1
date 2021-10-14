@@ -8,14 +8,36 @@ This exercise helps explore arrays and for loops.
 "use strict";
 
 let school=[];
-let schoolSize=4;
+let schoolSize=6;
+
+let player={
+  image: undefined,
+  x:0,
+  y:0,
+  sizeX:50,
+  sizeY:40,
+  vx:0,
+  vy:0,
+  speed:2,
+  ax: 0,
+  ay: 0,
+  acceleration: 0.1,
+  deceleration: 0,
+  maxSpeed: 8
+};
+
+function preload(){
+  // IMAGE SOURCE -->  https://pokemon-encyclopedia.fandom.com/wiki/Voltorb
+  player.image = loadImage("assets/images/voltorb.png");
+}
 
 /**
 Description of setup
 */
 function setup() {
   createCanvas(600,600);
-
+  player.y = random(0, height);
+  player.x = random(5,100);
   for (let i = 0; i < schoolSize; i++) {
     let fish= createFish(random(0,width), random(0,height));
     school.push(fish);
@@ -26,23 +48,49 @@ function createFish(x,y){
   let fish={
     x:x,
     y:y,
-    size:50,
+    size:40,
     vx:0,
     vy:0,
     speed:2
   };
   return fish;
 }
+
+
 /**
 Description of draw()
 */
 function draw() {
   background(0);
-
+  imageMode(CENTER);
+  image(player.image, player.x, player.y, player.sizeX, player.sizeY);
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
     displayFish(school[i]);
   }
+
+  //user commands
+  //user can use ARROWS or WASD on keyboard
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+    player.vx += player.acceleration;
+  }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+    player.vx -= player.acceleration;
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+    player.vy -= player.acceleration;
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+    player.vy += player.acceleration;
+  }
+
+  //set the users position and limit the speed
+  player.vx += player.ax;
+  player.vy += player.ay;
+  player.vx = constrain(player.vx, -player.maxSpeed, player.maxSpeed);
+  player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
+  player.x += player.vx;
+  player.y += player.vy;
 }
 
 function moveFish(fish){
@@ -69,8 +117,12 @@ function displayFish(fish){
   ellipse(fish.x,fish.y,fish.size);
   pop();
 }
-
-function mousePressed(){
-  let fish= createFish(mouseX,mouseY);
-  school.push(fish);
+//functtion that stops the users mouvement if they release their key
+function keyReleased() {
+  player.vx = player.deceleration;
+  player.vy = player.deceleration;
 }
+// function mousePressed(){
+//   let fish= createFish(mouseX,mouseY);
+//   school.push(fish);
+// }
