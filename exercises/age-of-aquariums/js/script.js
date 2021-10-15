@@ -7,15 +7,25 @@ This exercise helps explore arrays and for loops.
 
 "use strict";
 
+//array to store particles
 let school = [];
+
+//array to store thunder bolts
 let bolts = [];
+
+//limits the amount of particles
 let schoolSize = 6;
+
+//limits the amount of thunder bolts
 let boltSize = 3;
+
+//counts the players score
 let score = 0;
 
-//start off the game with the title
+//starts off the game with the title
 let state = `title`;
 
+//object that stores the players info
 let player = {
   image: undefined,
   x: 0,
@@ -32,20 +42,26 @@ let player = {
   maxSpeed: 8,
 };
 
+/**
+Loads the players image (voltorb)
+*/
 function preload() {
   // IMAGE SOURCE -->  https://pokemon-encyclopedia.fandom.com/wiki/Voltorb
   player.image = loadImage("assets/images/voltorb.png");
 }
 
 /**
-Description of setup
+Sets up the background and the elements of the game (player, thunder bolts and particles)
 */
 function setup() {
   createCanvas(600, 600);
+  // the player spawns at a random spot
   player.y = random(0, height);
   player.x = random(5, 100);
+
+  //the game elements are generated
   for (let i = 0; i < schoolSize; i++) {
-    let fish = createFish(random(0, width), random(0, height), random(0, 5));
+    let fish = createFish(random(0, width), random(0, height), random(0, 3));
     school.push(fish);
   }
   for (let i = 0; i < boltSize; i++) {
@@ -54,6 +70,9 @@ function setup() {
   }
 }
 
+/**
+stores info on a particle and returns it
+*/
 function createFish(x, y, speed) {
   let fish = {
     x: x,
@@ -66,6 +85,9 @@ function createFish(x, y, speed) {
   return fish;
 }
 
+/**
+stores info on a bolt and returns it
+*/
 function createBolt(x, y) {
   let bolt = {
     x: x,
@@ -77,7 +99,7 @@ function createBolt(x, y) {
 }
 
 /**
-Description of draw()
+Changes the stage of the game depending on the state
 */
 function draw() {
   background(0);
@@ -93,7 +115,9 @@ function draw() {
   }
 }
 
-//sets the title at the start
+/**
+sets the title at the start
+*/
 function title() {
   push();
   textSize(64);
@@ -103,24 +127,35 @@ function title() {
   pop();
 }
 
+/**
+calls the funciton needed to play
+*/
 function simulation() {
   displayElements();
   movePlayer();
   checkWin();
   checkLose();
 }
+
+/**
+verifies if the player collected all bolts
+*/
 function checkWin() {
   if (score === 3) {
     state = `win`;
   }
 }
-function checkLose() {
-  // console.log("youl lose");
-}
 
+/**
+displays player image and verifies the location of the particles and the bolts
+*/
 function displayElements() {
   imageMode(CENTER);
+  //display players image
   image(player.image, player.x, player.y, player.sizeX, player.sizeY);
+
+  //the loops go through the game elements respective arrays to move them, display them
+  //and calculate their distance from the player
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
     displayFish(school[i]);
@@ -133,23 +168,33 @@ function displayElements() {
   }
 }
 
+/**
+displays winning text
+*/
 function win() {
   push();
   textSize(64);
-  fill(255, 150, 150);
+  fill(250, 200, 0);
   textAlign(CENTER, CENTER);
   text(`YOU WON!`, width / 2, height / 2);
   pop();
 }
 
+/**
+displays losing text
+*/
 function lose() {
   push();
-  textSize(64);
-  fill(255, 150, 150);
+  textSize(45);
+  fill(0, 96, 255);
   textAlign(CENTER, CENTER);
   text(`YOU LOST:( TRY AGAIN`, width / 2, height / 2);
   pop();
 }
+
+/**
+allows player to move around
+*/
 function movePlayer() {
   //user commands
   //user can use ARROWS or WASD on keyboard
@@ -175,6 +220,9 @@ function movePlayer() {
   player.y += player.vy;
 }
 
+/**
+Moves the particles randomly
+*/
 function moveFish(fish) {
   let change = random(0, 1);
   if (change < 0.05) {
@@ -191,14 +239,20 @@ function moveFish(fish) {
   fish.y = constrain(fish.y, 0, height);
 }
 
-//displays the provided fish on the canvas
+/**
+displays the provided particle on the canvas
+*/
 function displayFish(fish) {
   push();
-  fill(200, 100, 100);
+  fill(0, 96, 255);
   noStroke();
   ellipse(fish.x, fish.y, fish.size);
   pop();
 }
+
+/**
+displays the provided bolt on the canvas
+*/
 function displayBolt(bolt) {
   if (!bolt.touched) {
     push();
@@ -209,34 +263,44 @@ function displayBolt(bolt) {
   }
 }
 
+/**
+checks if the player touched a bolt and changes the score
+*/
 function checkBolts(bolt) {
   if (!bolt.touched) {
-    //stop the program loop if the player touches a spark
     let d = dist(player.x, player.y, bolt.x, bolt.y);
 
     if (d < player.sizeX / 2 + bolt.size / 2) {
       bolt.touched = true;
+      //when the player collects a bolt their score goes up
       score += 1;
       console.log(score);
     }
   }
 }
 
+/**
+checks if the player touched a particle and changes the state
+*/
 function checkParticles(fish) {
-  //stop the program loop if the player touches a spark
   let d = dist(player.x, player.y, fish.x, fish.y);
 
   if (d < player.sizeX / 2 + fish.size / 2) {
     state = `lose`;
   }
 }
-//functtion that stops the users mouvement if they release their key
+
+/**
+ stops the users mouvement if they release their key
+*/
 function keyReleased() {
   player.vx = player.deceleration;
   player.vy = player.deceleration;
 }
 
-//checks if the player clicked during the title screen to start
+/**
+checks if the player clicked during the title screen to start
+*/
 function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
