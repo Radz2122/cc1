@@ -12,6 +12,10 @@ let bolts=[];
 let schoolSize=6;
 let boltSize=3;
 let score=0;
+
+//start off the game with the title
+let state = `title`;
+
 let player={
   image: undefined,
   x:0,
@@ -80,6 +84,20 @@ Description of draw()
 */
 function draw() {
   background(0);
+
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`) {
+    simulation();
+  }
+  else if (state === `win`) {
+    win();
+  }
+  else if (state === `lose`) {
+    lose();
+  }
+
   imageMode(CENTER);
 
   image(player.image, player.x, player.y, player.sizeX, player.sizeY);
@@ -117,7 +135,18 @@ function draw() {
   player.y += player.vy;
 
 
+}//  END DRAW
+
+//sets the title at the start
+function title() {
+  push();
+  textSize(64);
+  fill(200,100,100);
+  textAlign(CENTER,CENTER);
+  text(`Left click to start`,width/2,height/2);
+  pop();
 }
+
 
 function moveFish(fish){
   let change= random(0,1);
