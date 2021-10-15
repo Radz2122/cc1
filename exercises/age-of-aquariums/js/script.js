@@ -230,7 +230,12 @@ function checkBolts(bolt){
 }
 
 function checkParticles(fish){
-  
+  //stop the program loop if the player touches a spark
+    let d = dist(player.x, player.y, fish.x, fish.y);
+
+    if (d< player.sizeX/2+fish.size/2) {
+      state = `lose`;
+    }
 }
 //functtion that stops the users mouvement if they release their key
 function keyReleased() {
