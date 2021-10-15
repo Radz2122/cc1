@@ -72,7 +72,6 @@ function createBolt(x,y){
     x:x,
     y:y,
     size:25,
-    score: 0,
     touched:false
   };
   return bolt;
@@ -97,45 +96,7 @@ function draw() {
   else if (state === `lose`) {
     lose();
   }
-
-  imageMode(CENTER);
-
-  image(player.image, player.x, player.y, player.sizeX, player.sizeY);
-  for (let i = 0; i < school.length; i++) {
-    moveFish(school[i]);
-    displayFish(school[i]);
-  }
-
-  for (let i = 0; i < bolts.length; i++) {
-    displayBolt(bolts[i]);
-    checkBolts(bolts[i]);
-  }
-
-  //user commands
-  //user can use ARROWS or WASD on keyboard
-  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-    player.vx += player.acceleration;
-  }
-  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-    player.vx -= player.acceleration;
-  }
-  if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-    player.vy -= player.acceleration;
-  }
-  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-    player.vy += player.acceleration;
-  }
-
-  //set the users position and limit the speed
-  player.vx += player.ax;
-  player.vy += player.ay;
-  player.vx = constrain(player.vx, -player.maxSpeed, player.maxSpeed);
-  player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
-  player.x += player.vx;
-  player.y += player.vy;
-
-
-}//  END DRAW
+}
 
 //sets the title at the start
 function title() {
@@ -147,6 +108,78 @@ function title() {
   pop();
 }
 
+function simulation(){
+  displayElements();
+  movePlayer();
+  checkWin();
+  checkLose();
+}
+function checkWin(){
+  if(score===3){
+    state=`win`;
+  }
+}
+function checkLose(){
+  // console.log("youl lose");
+}
+
+function displayElements(){
+    imageMode(CENTER);
+    image(player.image, player.x, player.y, player.sizeX, player.sizeY);
+    for (let i = 0; i < school.length; i++) {
+      moveFish(school[i]);
+      displayFish(school[i]);
+      checkParticles(school[i]);
+    }
+
+    for (let i = 0; i < bolts.length; i++) {
+      displayBolt(bolts[i]);
+      checkBolts(bolts[i]);
+    }
+}
+
+function win() {
+  push();
+  textSize(64);
+  fill(255,150,150);
+  textAlign(CENTER,CENTER);
+  text(`YOU WON!`,width/2,height/2);
+  pop();
+}
+
+function lose(){
+  push();
+  textSize(64);
+  fill(255,150,150);
+  textAlign(CENTER,CENTER);
+  text(`YOU LOST:( TRY AGAIN`,width/2,height/2);
+  pop();
+}
+function movePlayer(){
+
+    //user commands
+    //user can use ARROWS or WASD on keyboard
+    if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+      player.vx += player.acceleration;
+    }
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      player.vx -= player.acceleration;
+    }
+    if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      player.vy -= player.acceleration;
+    }
+    if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+      player.vy += player.acceleration;
+    }
+
+    //set the users position and limit the speed
+    player.vx += player.ax;
+    player.vy += player.ay;
+    player.vx = constrain(player.vx, -player.maxSpeed, player.maxSpeed);
+    player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
+    player.x += player.vx;
+    player.y += player.vy;
+}
 
 function moveFish(fish){
   let change= random(0,1);
@@ -195,12 +228,19 @@ function checkBolts(bolt){
     }
   }
 }
+
+function checkParticles(fish){
+  
+}
 //functtion that stops the users mouvement if they release their key
 function keyReleased() {
   player.vx = player.deceleration;
   player.vy = player.deceleration;
 }
-// function mousePressed(){
-//   let fish= createFish(mouseX,mouseY);
-//   school.push(fish);
-// }
+
+//checks if the player clicked during the title screen to start
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
+}
