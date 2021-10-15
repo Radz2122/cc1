@@ -8,16 +8,16 @@ This exercise helps explore arrays and for loops.
 "use strict";
 
 //array to store particles
-let school = [];
+let particleGrp = [];
 
 //array to store thunder bolts
 let bolts = [];
 
 //limits the amount of particles
-let schoolSize = 6;
+let particleGrpSize = 6;
 
 //limits the amount of thunder bolts
-let boltSize = 3;
+let boltGrpSize = 3;
 
 //counts the players score
 let score = 0;
@@ -60,11 +60,11 @@ function setup() {
   player.x = random(5, 100);
 
   //the game elements are generated
-  for (let i = 0; i < schoolSize; i++) {
-    let fish = createFish(random(0, width), random(0, height), random(0, 3));
-    school.push(fish);
+  for (let i = 0; i < particleGrpSize; i++) {
+    let particle = createParticle(random(0, width),random(0, height),random(0, 4));
+    particleGrp.push(particle);
   }
-  for (let i = 0; i < boltSize; i++) {
+  for (let i = 0; i < boltGrpSize; i++) {
     let bolt = createBolt(random(0, width), random(0, height));
     bolts.push(bolt);
   }
@@ -73,16 +73,16 @@ function setup() {
 /**
 stores info on a particle and returns it
 */
-function createFish(x, y, speed) {
-  let fish = {
+function createParticle(x, y, speed) {
+  let particle = {
     x: x,
     y: y,
     size: 40,
     vx: 0,
     vy: 0,
-    speed: speed,
+    speed: speed
   };
-  return fish;
+  return particle;
 }
 
 /**
@@ -93,7 +93,7 @@ function createBolt(x, y) {
     x: x,
     y: y,
     size: 25,
-    touched: false,
+    touched: false
   };
   return bolt;
 }
@@ -106,11 +106,14 @@ function draw() {
 
   if (state === `title`) {
     title();
-  } else if (state === `simulation`) {
+  }
+  else if (state === `simulation`) {
     simulation();
-  } else if (state === `win`) {
+  }
+  else if (state === `win`) {
     win();
-  } else if (state === `lose`) {
+  }
+  else if (state === `lose`) {
     lose();
   }
 }
@@ -134,7 +137,6 @@ function simulation() {
   displayElements();
   movePlayer();
   checkWin();
-  checkLose();
 }
 
 /**
@@ -156,10 +158,10 @@ function displayElements() {
 
   //the loops go through the game elements respective arrays to move them, display them
   //and calculate their distance from the player
-  for (let i = 0; i < school.length; i++) {
-    moveFish(school[i]);
-    displayFish(school[i]);
-    checkParticles(school[i]);
+  for (let i = 0; i < particleGrp.length; i++) {
+    moveParticle(particleGrp[i]);
+    displayParticle(particleGrp[i]);
+    checkParticles(particleGrp[i]);
   }
 
   for (let i = 0; i < bolts.length; i++) {
@@ -223,30 +225,30 @@ function movePlayer() {
 /**
 Moves the particles randomly
 */
-function moveFish(fish) {
+function moveParticle(particle) {
   let change = random(0, 1);
   if (change < 0.05) {
-    fish.vx = random(-fish.speed, fish.speed);
-    fish.vy = random(-fish.speed, fish.speed);
+    particle.vx = random(-particle.speed, particle.speed);
+    particle.vy = random(-particle.speed, particle.speed);
   }
 
-  //move the fish
-  fish.x += fish.vx;
-  fish.y += fish.vy;
+  //move the particle
+  particle.x += particle.vx;
+  particle.y += particle.vy;
 
-  //constrain the fish to the canvas
-  fish.x = constrain(fish.x, 0, width);
-  fish.y = constrain(fish.y, 0, height);
+  //constrain the particle to the canvas
+  particle.x = constrain(particle.x, 0, width);
+  particle.y = constrain(particle.y, 0, height);
 }
 
 /**
 displays the provided particle on the canvas
 */
-function displayFish(fish) {
+function displayParticle(particle) {
   push();
   fill(0, 96, 255);
   noStroke();
-  ellipse(fish.x, fish.y, fish.size);
+  ellipse(particle.x, particle.y, particle.size);
   pop();
 }
 
@@ -282,10 +284,10 @@ function checkBolts(bolt) {
 /**
 checks if the player touched a particle and changes the state
 */
-function checkParticles(fish) {
-  let d = dist(player.x, player.y, fish.x, fish.y);
+function checkParticles(particle) {
+  let d = dist(player.x, player.y, particle.x, particle.y);
 
-  if (d < player.sizeX / 2 + fish.size / 2) {
+  if (d < player.sizeX / 2 + particle.size / 2) {
     state = `lose`;
   }
 }
