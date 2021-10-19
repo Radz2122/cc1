@@ -10,9 +10,10 @@ This is my first project, a spy simulation game
 //starts off the game with the title
 let state = `title`;
 
-let bp={
-  image:undefined,
-};
+
+let bpImg1;
+let bpImg2;
+let bpImg3;
 
 //object that represents the player
 let player = {
@@ -36,21 +37,18 @@ function preload() {
   player.image = loadImage("assets/images/survivor-move_flashlight_0.png");
 
   // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
-  bp.image= loadImage("assets/images/blueprint.png");
+  bpImg1= loadImage("assets/images/blueprint.png");
+  bpImg2= loadImage("assets/images/blueprint.png");
+  bpImg3= loadImage("assets/images/blueprint.png");
+
 }
 
 
 /**
 Description of setup
 */
-function setup() {
+function setup(){
 createCanvas(windowWidth, windowHeight);
-
-for (let i = 0; i < 3; i++) {
-  // let bp = createBp(random(0, width),random(0, height));
-  // particleGrp.push(particle);
-  image(bp.image, random(0,width), random(0, height), 50, 50);
-}
 }
 
 
@@ -58,9 +56,8 @@ for (let i = 0; i < 3; i++) {
 Description of draw()
 */
 function draw() {
-  background(255, 255, 255);
-  imageMode(CENTER);
-  background(0);
+background(0);
+
   if (state === `title`) {
     title();
   }
@@ -92,23 +89,14 @@ calls the funciton needed to play
 */
 function simulation() {
   //display the player when the simulation starts
+  imageMode(CENTER);
   image(player.image, player.x, player.y, player.size, player.size);
+  image(bpImg1, 100,100, 50, 50);
+  image(bpImg2, 400,400, 50, 50);
+  image(bpImg3, 1000,1000, 50, 50);
   movePlayer();
-  loadBp();
-  // createBp();
-}
-function loadBp(){
-  //the game elements are generated
-
 }
 
-// function createBp(x,y){
-//     let bp = {
-//       x: x,
-//       y: y
-//     };
-//     return bp;
-// }
 /**
 allows player to move around
 */
