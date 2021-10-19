@@ -6,8 +6,12 @@ This is my first project, a spy simulation game
 */
 
 "use strict";
+
+//starts off the game with the title
+let state = `title`;
+
 //object that represents the player
-let user = {
+let player = {
   image: undefined,
   x: 0,
   y: 0,
@@ -26,7 +30,7 @@ Description of preload
 */
 function preload() {
   // SOURCE------- https://opengameart.org/content/animated-top-down-survivor-player
-  user.image = loadImage("assets/images/survivor-move_flashlight_0.png");
+  player.image = loadImage("assets/images/survivor-move_flashlight_0.png");
 }
 
 
@@ -44,5 +48,83 @@ Description of draw()
 function draw() {
   background(255, 255, 255);
   imageMode(CENTER);
-  image(user.image, user.x, user.y, user.size, user.size);
+  background(0);
+  image(player.image, player.x, player.y, player.size, player.size);
+
+
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`) {
+    simulation();
+  }
+  else if (state === `win`) {
+    win();
+  }
+  else if (state === `lose`) {
+    lose();
+  }
+}
+
+/**
+sets the title at the start
+*/
+function title() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`Left click to start`, width / 2, height / 2);
+  pop();
+}
+
+/**
+calls the funciton needed to play
+*/
+function simulation() {
+  movePlayer();
+}
+
+/**
+allows player to move around
+*/
+function movePlayer() {
+  //player commands
+  //player can use ARROWS or WASD on keyboard
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+    player.vx += player.acceleration;
+  }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+    player.vx -= player.acceleration;
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+    player.vy -= player.acceleration;
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+    player.vy += player.acceleration;
+  }
+
+  //set the players position and limit the speed
+  player.vx += player.ax;
+  player.vy += player.ay;
+  player.vx = constrain(player.vx, -player.maxSpeed, player.maxSpeed);
+  player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
+  player.x += player.vx;
+  player.y += player.vy;
+}
+
+/**
+checks if the player clicked during the title screen to start
+*/
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
+}
+/**
+ stops the users mouvement if they release their key
+*/
+function keyReleased() {
+  player.vx = player.deceleration;
+  player.vy = player.deceleration;
 }
