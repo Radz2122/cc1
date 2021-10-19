@@ -10,12 +10,16 @@ This is my first project, a spy simulation game
 //starts off the game with the title
 let state = `title`;
 
+let bp={
+  image:undefined,
+};
+
 //object that represents the player
 let player = {
   image: undefined,
   x: 0,
   y: 0,
-  size: 200,
+  size: 100,
   vx: 0,
   vy: 0,
   ax: 0,
@@ -24,13 +28,15 @@ let player = {
   deceleration: 0,
   maxSpeed: 8
 };
-
 /**
 Description of preload
 */
 function preload() {
   // SOURCE------- https://opengameart.org/content/animated-top-down-survivor-player
   player.image = loadImage("assets/images/survivor-move_flashlight_0.png");
+
+  // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
+  bp.image= loadImage("assets/images/blueprint.png");
 }
 
 
@@ -39,6 +45,12 @@ Description of setup
 */
 function setup() {
 createCanvas(windowWidth, windowHeight);
+
+for (let i = 0; i < 3; i++) {
+  // let bp = createBp(random(0, width),random(0, height));
+  // particleGrp.push(particle);
+  image(bp.image, random(0,width), random(0, height), 50, 50);
+}
 }
 
 
@@ -49,9 +61,6 @@ function draw() {
   background(255, 255, 255);
   imageMode(CENTER);
   background(0);
-  image(player.image, player.x, player.y, player.size, player.size);
-
-
   if (state === `title`) {
     title();
   }
@@ -82,9 +91,24 @@ function title() {
 calls the funciton needed to play
 */
 function simulation() {
+  //display the player when the simulation starts
+  image(player.image, player.x, player.y, player.size, player.size);
   movePlayer();
+  loadBp();
+  // createBp();
+}
+function loadBp(){
+  //the game elements are generated
+
 }
 
+// function createBp(x,y){
+//     let bp = {
+//       x: x,
+//       y: y
+//     };
+//     return bp;
+// }
 /**
 allows player to move around
 */
