@@ -2,7 +2,7 @@
 Project 1
 Radhika Patel
 
-This is my first project, a spy simulation game
+This is my first project, a spy/escape/infiltration simulation game
 */
 
 "use strict";
@@ -44,6 +44,14 @@ let dialogBox = {
   duration: 2000
 };
 
+//object that represents the exit
+let exit={
+  image:undefined,
+  x:undefined,
+  y:undefined,
+  sizeX:130,
+  sizeY:60
+}
 //object that represents the player
 let player = {
   image: undefined,
@@ -68,6 +76,9 @@ function preload() {
   // // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
   // bpImg= loadImage("assets/images/blueprint.png");
 
+  //SOURCE--------- http://pixelartmaker.com/art/32324ae8c4a7f02
+  exit.image= loadImage("assets/images/exit.png");
+
 }
 
 /**
@@ -75,7 +86,6 @@ Description of setup
 */
 function setup(){
 createCanvas(windowWidth, windowHeight);
-
 //the game elements are generated
 for (let i = 0; i < 3; i++) {
   let bp = createBp(random(0, width),random(0, height));
@@ -88,6 +98,10 @@ for (var i = 0; i <1; i++) {
   // Position the dialog box with its centre in the centre of the canvas
   dialogBox.x = width/2;
   dialogBox.y = height/2;
+
+  //position exit img
+  exit.x=width/2;
+  exit.y=height-50;
 }
 
 
@@ -133,9 +147,29 @@ function simulation() {
   displayObstacle1();
   // Display the dialog box
   displayDialog();
+  //display exit img
+  displayExit();
   // verifyScoreAddObstacle(); TO DOOOO ADD A REC
 }
 
+/**
+displays the exit img
+*/
+function displayExit(){
+  push();
+  imageMode(CENTER);
+  image(exit.image, exit.x, exit.y, exit.sizeX, exit.sizeY);
+  //verify if the player tried to exit
+  checkPlayerExit();
+  pop();
+}
+
+/**
+verifies if the player tried to exit
+*/
+function checkPlayerExit(){
+
+}
 /**
 displays a dialog box
 */
