@@ -19,7 +19,11 @@ let obGrp=[];
 //checks if the player picked up a bp to start the first obstacle
 let firstBpPickedUp=false;
 
+//stores the players current score
 let score=0;
+
+//dialog
+let dialogString='hmm... Come back when you have all the missing blueprints';
 
 //object that represents the player
 let player = {
