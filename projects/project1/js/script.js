@@ -25,6 +25,25 @@ let score=0;
 //dialog
 let dialogString='hmm... Come back when you have all the missing blueprints';
 
+//object representing dialog box
+//Base source code taken from -->  https://editor.p5js.org/pippinbarr/sketches/ceXeaUZO7
+let dialogBox = {
+  // Position on screen (will set in setup())
+  x: undefined,
+  y: undefined,
+  // Current string to display (starts empty)
+  string: ``,
+  // Whether it's currently visible on the canvas
+  visible: false,
+  // Dimensions
+  width: 200,
+  height: 100,
+  // Padding
+  padding: 20,
+  // How long the dialog box should display before auto-closing
+  duration: 2000
+};
+
 //object that represents the player
 let player = {
   image: undefined,
@@ -65,8 +84,10 @@ for (let i = 0; i < 3; i++) {
 for (var i = 0; i <1; i++) {
   let ob=createObstacle(0,random(0,height),random(200,500));
   obGrp.push(ob);
-}
-
+  }
+  // Position the dialog box with its centre in the centre of the canvas
+  dialogBox.x = width/2;
+  dialogBox.y = height/2;
 }
 
 
@@ -110,7 +131,25 @@ function simulation() {
   displayBp();
   movePlayer();
   displayObstacle1();
+  // Display the dialog box
+  displayDialog();
   // verifyScoreAddObstacle(); TO DOOOO ADD A REC
+}
+
+/**
+displays a dialog box
+*/
+function displayDialog(){
+  if(dialogBox.visible){
+    push();
+    rectMode(CENTER);
+    stroke(255,0,0);
+    strokeWeight(5);
+    rect(dialogBox.x, dialogBox.y, dialogBox.width, dialogBox.height);
+    rectMode(CENTER);
+    text(dialogBox.string, dialogBox.x, dialogBox.y, dialogBox.width - dialogBox.padding, dialogBox.height - dialogBox.padding);
+    pop();
+  }
 }
 /**
 stores info on a blueprint and returns it
