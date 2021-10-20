@@ -11,6 +11,8 @@ This is my first project, a spy simulation game
 let state = `title`;
 //array to store blueprints
 let bpGrp = [];
+//array to store obstacle
+let obGrp=[];
 
 //object that represents the player
 let player = {
@@ -49,7 +51,13 @@ for (let i = 0; i < 3; i++) {
   let bp = createBp(random(0, width),random(0, height));
   bpGrp.push(bp);
   }
+for (var i = 0; i <1; i++) {
+  let ob=createObstacle(0,random(0,height),random(200,500));
+  obGrp.push(ob);
 }
+
+}
+
 
 /**
 Description of draw()
@@ -91,6 +99,8 @@ function simulation() {
   image(player.image, player.x, player.y, player.size, player.size);
   displayBp();
   movePlayer();
+  displayObstacle1();
+
 }
 /**
 stores info on a blueprint and returns it
@@ -105,18 +115,60 @@ function createBp(x, y) {
   };
   return bp;
 }
+
 /**
-displays the blueprints and calls the creation function
+stores info on an obstac;e and returns it
 */
+function createObstacle(x,y,sizeY){
+  let obstacle={
+    x:x,
+    y:y,
+    sizeX:60,
+    sizeY:sizeY,
+    speed:5
+  };
+  return obstacle;
+}
+
+
+/**
+displays the first obstacle, the rectangle
+*/
+function displayObstacle1(){
+  for (let i = 0; i < obGrp.length; i++) {
+    createObstacle1Shape(obGrp[i]);
+    moveObstacle(obGrp[i]);
+  }
+}
+function createObstacle1Shape(obstacle){
+  push();
+  fill(0, 96, 255);
+  rect(obstacle.x,obstacle.y,obstacle.sizeX, obstacle.sizeY);
+  pop();
+}
+
+/**
+moves the first obstacle, the rectangle in a loop and respawns it at a random spot when its out of the screen
+*/
+function moveObstacle(obstacle){
+  obstacle.x=obstacle.x+obstacle.speed;
+  if(obstacle.x>width){
+    obstacle.x=0;
+    obstacle.y=random(0,height);
+    obstacle.sizeY=random(85,500);
+  }
+}
+
+/**
+ displays the blueprints and calls the creation function
+  */
 function displayBp(){
-  //the loop goes through the bp array to create and check on them if they havent bene collected yet
+  //the loop goes through the bp array to create and check on them if they havent been collected yet
     for (let i = 0; i < bpGrp.length; i++) {
       createBpShape(bpGrp[i]);
       checkBp(bpGrp[i]);
     }
-
 }
-
 
 /**
 creates the bp and makes themn disappear once collected
