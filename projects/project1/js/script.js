@@ -9,11 +9,8 @@ This is my first project, a spy simulation game
 
 //starts off the game with the title
 let state = `title`;
-
-
-let bpImg1;
-let bpImg2;
-let bpImg3;
+//array to store blueprints
+let bpGrp = [];
 
 //object that represents the player
 let player = {
@@ -36,21 +33,23 @@ function preload() {
   // SOURCE------- https://opengameart.org/content/animated-top-down-survivor-player
   player.image = loadImage("assets/images/survivor-move_flashlight_0.png");
 
-  // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
-  bpImg1= loadImage("assets/images/blueprint.png");
-  bpImg2= loadImage("assets/images/blueprint.png");
-  bpImg3= loadImage("assets/images/blueprint.png");
+  // // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
+  // bpImg= loadImage("assets/images/blueprint.png");
 
 }
-
 
 /**
 Description of setup
 */
 function setup(){
 createCanvas(windowWidth, windowHeight);
-}
 
+//the game elements are generated
+for (let i = 0; i < 3; i++) {
+  let bp = createBp(random(0, width),random(0, height));
+  bpGrp.push(bp);
+  }
+}
 
 /**
 Description of draw()
@@ -89,14 +88,42 @@ calls the funciton needed to play
 */
 function simulation() {
   //display the player when the simulation starts
-  imageMode(CENTER);
   image(player.image, player.x, player.y, player.size, player.size);
-  image(bpImg1, 100,100, 50, 50);
-  image(bpImg2, 400,400, 50, 50);
-  image(bpImg3, 1000,1000, 50, 50);
+  displayBp();
   movePlayer();
 }
+/**
+stores info on a blueprint and returns it
+*/
+function createBp(x, y) {
+  let bp = {
+    x: x,
+    y: y,
+    touched:false
+  };
+  return bp;
+}
+/**
+displays the blueprints and calls the creation fucntion
+*/
+function displayBp(){
+  //the loop goes through the bp array to create
+  for (let i = 0; i < bpGrp.length; i++) {
+    createBpShape(bpGrp[i]);
+  }
+}
 
+
+/**
+creates the bp
+*/
+function createBpShape(bp){
+  push();
+  fill(0, 96, 255);
+  noStroke();
+  ellipse(bp.x, bp.y, 100);
+  pop();
+}
 /**
 allows player to move around
 */
