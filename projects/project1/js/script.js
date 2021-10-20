@@ -71,7 +71,6 @@ Description of draw()
 */
 function draw() {
 background(0);
-
   if (state === `title`) {
     title();
   }
@@ -154,7 +153,9 @@ function createObstacle1Shape(obstacle){
   push();
   fill(0, 96, 255);
   rect(obstacle.x,obstacle.y,obstacle.sizeX, obstacle.sizeY);
-  firstBpPickedUp=true;
+  if(score===1){
+    firstBpPickedUp=true;
+  }
   pop();
 }
 
@@ -170,12 +171,9 @@ function moveObstacle(obstacle){
   }
 }
 function checkObstacle(obstacle){
-  if (!obstacle.touched) {
-    let d = dist(player.x, player.y, obstacle.x, obstacle.y);
-
-    if (d < player.size / 2 + obstacle.sizeX/2) {
-      state = `lose`;
-    }
+  let d = dist(player.x, player.y, obstacle.x, obstacle.y);
+  if (d < player.size / 2 + obstacle.sizeX/2) {
+    state = `lose`;
   }
 }
 /**
