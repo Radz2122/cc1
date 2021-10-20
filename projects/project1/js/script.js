@@ -106,26 +106,29 @@ function createBp(x, y) {
   return bp;
 }
 /**
-displays the blueprints and calls the creation fucntion
+displays the blueprints and calls the creation function
 */
 function displayBp(){
-  //the loop goes through the bp array to create
-  for (let i = 0; i < bpGrp.length; i++) {
-    createBpShape(bpGrp[i]);
-    checkBp(bpGrp[i]);
-  }
+  //the loop goes through the bp array to create and check on them if they havent bene collected yet
+    for (let i = 0; i < bpGrp.length; i++) {
+      createBpShape(bpGrp[i]);
+      checkBp(bpGrp[i]);
+    }
+
 }
 
 
 /**
-creates the bp
+creates the bp and makes themn disappear once collected
 */
 function createBpShape(bp){
-  push();
-  fill(0, 96, 255);
-  noStroke();
-  rect(bp.x, bp.y, bp.sizeX,bp.sizeY);
-  pop();
+  if (!bp.touched) {
+    push();
+    fill(0, 96, 255);
+    noStroke();
+    rect(bp.x, bp.y, bp.sizeX,bp.sizeY);
+    pop();
+  }
 }
 /**
 allows player to move around
