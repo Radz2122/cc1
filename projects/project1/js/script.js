@@ -13,6 +13,9 @@ let state = `title`;
 let bpGrp = [];
 //array to store obstacle
 let obGrp=[];
+//checks if the player picked up a bp to start the first obstacle
+let firstBpPickedUp=false;
+let score=0;
 
 //object that represents the player
 let player = {
@@ -100,6 +103,7 @@ function simulation() {
   displayBp();
   movePlayer();
   displayObstacle1();
+  verifyScoreAddObstacle();
 
 }
 /**
@@ -137,13 +141,18 @@ displays the first obstacle, the rectangle
 function displayObstacle1(){
   for (let i = 0; i < obGrp.length; i++) {
     createObstacle1Shape(obGrp[i]);
-    moveObstacle(obGrp[i]);
+    if(firstBpPickedUp){
+      moveObstacle(obGrp[i]);
+    }
+
+
   }
 }
 function createObstacle1Shape(obstacle){
   push();
   fill(0, 96, 255);
   rect(obstacle.x,obstacle.y,obstacle.sizeX, obstacle.sizeY);
+  firstBpPickedUp=true;
   pop();
 }
 
@@ -219,7 +228,8 @@ function checkBp(bp) {
 
     if (d < player.size / 2 + bp.sizeY/2 ) {
       bp.touched = true;
-      console.log("touch");
+      score+=1;
+      console.log(score);
     }
   }
 }
