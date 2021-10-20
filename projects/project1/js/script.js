@@ -121,7 +121,7 @@ function createBpShape(bp){
   push();
   fill(0, 96, 255);
   noStroke();
-  ellipse(bp.x, bp.y, 100);
+  rect(bp.x, bp.y, 60,40);
   pop();
 }
 /**
