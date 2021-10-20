@@ -9,12 +9,16 @@ This is my first project, a spy simulation game
 
 //starts off the game with the title
 let state = `title`;
+
 //array to store blueprints
 let bpGrp = [];
+
 //array to store obstacle
 let obGrp=[];
+
 //checks if the player picked up a bp to start the first obstacle
 let firstBpPickedUp=false;
+
 let score=0;
 
 //object that represents the player
@@ -103,8 +107,7 @@ function simulation() {
   displayBp();
   movePlayer();
   displayObstacle1();
-  verifyScoreAddObstacle();
-
+  // verifyScoreAddObstacle(); TO DOOOO ADD A REC
 }
 /**
 stores info on a blueprint and returns it
@@ -121,7 +124,7 @@ function createBp(x, y) {
 }
 
 /**
-stores info on an obstac;e and returns it
+stores info on an obstacle and returns it
 */
 function createObstacle(x,y,sizeY){
   let obstacle={
@@ -141,11 +144,10 @@ displays the first obstacle, the rectangle
 function displayObstacle1(){
   for (let i = 0; i < obGrp.length; i++) {
     createObstacle1Shape(obGrp[i]);
+    checkObstacle(obGrp[i]);
     if(firstBpPickedUp){
       moveObstacle(obGrp[i]);
     }
-
-
   }
 }
 function createObstacle1Shape(obstacle){
@@ -167,7 +169,15 @@ function moveObstacle(obstacle){
     obstacle.sizeY=random(85,500);
   }
 }
+function checkObstacle(obstacle){
+  if (!obstacle.touched) {
+    let d = dist(player.x, player.y, obstacle.x, obstacle.y);
 
+    if (d < player.size / 2 + obstacle.sizeX/2) {
+      state = `lose`;
+    }
+  }
+}
 /**
  displays the blueprints and calls the creation function
   */
@@ -232,6 +242,18 @@ function checkBp(bp) {
       console.log(score);
     }
   }
+}
+
+/**
+displays losing text
+*/
+function lose() {
+  push();
+  textSize(45);
+  fill(0, 96, 255);
+  textAlign(CENTER, CENTER);
+  text(`YOU LOST:( TRY AGAIN`, width / 2, height / 2);
+  pop();
 }
 
 /**
