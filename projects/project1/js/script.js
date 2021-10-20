@@ -99,6 +99,8 @@ function createBp(x, y) {
   let bp = {
     x: x,
     y: y,
+    sizeX:60,
+    sizeY:40,
     touched:false
   };
   return bp;
@@ -110,6 +112,7 @@ function displayBp(){
   //the loop goes through the bp array to create
   for (let i = 0; i < bpGrp.length; i++) {
     createBpShape(bpGrp[i]);
+    checkBp(bpGrp[i]);
   }
 }
 
@@ -121,7 +124,7 @@ function createBpShape(bp){
   push();
   fill(0, 96, 255);
   noStroke();
-  rect(bp.x, bp.y, 60,40);
+  rect(bp.x, bp.y, bp.sizeX,bp.sizeY);
   pop();
 }
 /**
@@ -150,6 +153,20 @@ function movePlayer() {
   player.vy = constrain(player.vy, -player.maxSpeed, player.maxSpeed);
   player.x += player.vx;
   player.y += player.vy;
+}
+
+/**
+checks if the player touched a bp
+*/
+function checkBp(bp) {
+  if (!bp.touched) {
+    let d = dist(player.x, player.y, bp.x, bp.y);
+
+    if (d < player.size / 2 + bp.sizeY/2 ) {
+      bp.touched = true;
+      console.log("touch");
+    }
+  }
 }
 
 /**
