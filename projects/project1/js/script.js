@@ -244,13 +244,15 @@ function createObstacle(x,y,sizeY){
 /**
 stores info on the second obstacle and stores it
 */
-function createObstacle2(x,y){
+function createObstacle2(x,y.numAtk){
   let obstacle2={
     x:x,
     y:y,
     sizeX:30,
     sizeY:30,
-    speed:8
+    speed:8,
+    //the amount of circles that are shot out
+    numAtk:numAtk
   };
   return obstacle2;
 }
