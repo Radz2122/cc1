@@ -40,8 +40,8 @@ let dialogBox = {
   // Whether it's currently visible on the canvas
   visible: false,
   // Dimensions
-  width: 300,
-  height: 200,
+  width: 200,
+  height: 100,
   // Padding
   padding: 20,
   // How long the dialog box should display before auto-closing
@@ -79,10 +79,6 @@ function preload() {
 
   //SOURCE--------- me:)
   exit.image= loadImage("assets/images/exit.png");
-
-
-
-
 }
 
 /**
@@ -243,10 +239,11 @@ function displayDialog(){
   if(dialogBox.visible){
     push();
     rectMode(CENTER);
-    stroke(255,0,0);
-    strokeWeight(5);
     rect(dialogBox.x, dialogBox.y, dialogBox.width, dialogBox.height);
     rectMode(CENTER);
+    textSize(15);
+    textStyle(BOLD);
+    fill(0);
     text(dialogBox.string, dialogBox.x, dialogBox.y, dialogBox.width - dialogBox.padding, dialogBox.height - dialogBox.padding);
     pop();
   }
