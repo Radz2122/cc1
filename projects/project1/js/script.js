@@ -100,9 +100,8 @@ for (var i = 0; i <1; i++) {
   let ob=createObstacle(0,random(0,height),random(500,700));
   obGrp.push(ob);
   }
-
-generateCircles();
-
+  // to start off the circle animation
+  generateCircles();
   // Position the dialog box with its centre in the centre of the canvas
   dialogBox.x = width/2;
   dialogBox.y = height/2;
@@ -162,6 +161,10 @@ function simulation() {
   displayExit();
   // verifyScoreAddObstacle(); TO DOOOO ADD A REC
 }
+
+/**
+Generates the cricles at the beginning and once they go out of the screen
+*/
 function generateCircles(){
   //loops to generate the circles one after the other
   for (let i = 0; i<4; i++) {
@@ -291,7 +294,7 @@ function displayObstacle2(){
   for (let i = 0; i < ob2Grp.length; i++) {
     createObstacle2Shape(ob2Grp[i]);
     moveObstacle2(ob2Grp[i]);
-    ;
+    checkObstacle2(ob2Grp[i]);
   }
 }
 
@@ -311,12 +314,20 @@ moves the second obstacle, the circles
 */
 function moveObstacle2(obstacle2){
     obstacle2.y=obstacle2.y-obstacle2.speed;
-    console.log(ob2Grp);
-    if(obstacle2.y<-1900){
+    if(obstacle2.y<-height){
       ob2Grp.splice(0,ob2Grp.length);
       generateCircles();
-      console.log(ob2Grp);
     }
+}
+
+/**
+verifies if the player touched an obstacle and ends the game if they did
+*/
+function checkObstacle2(obstacle2){
+  let d = dist(player.x, player.y, obstacle2.x, obstacle2.y);
+  if (d < player.size / 2 + obstacle2.sizeX/2) {
+    state = `lose`;
+  }
 }
 
 /**
