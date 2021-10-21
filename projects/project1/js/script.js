@@ -241,6 +241,19 @@ function createObstacle(x,y,sizeY){
   return obstacle;
 }
 
+/**
+stores info on the second obstacle and stores it
+*/
+function createObstacle2(x,y){
+  let obstacle2={
+    x:x,
+    y:y,
+    sizeX:30,
+    sizeY:30,
+    speed:8
+  };
+  return obstacle2;
+}
 
 /**
 displays the first obstacle, the rectangle
