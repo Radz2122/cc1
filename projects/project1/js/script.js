@@ -168,7 +168,30 @@ function displayExit(){
 verifies if the player tried to exit
 */
 function checkPlayerExit(){
+  let d = dist(player.x, player.y, exit.x, exit.y);
+  if (d < player.size / 2 + exit.sizeX/2) {
+    if(score<3){
+    // We display the dialog box if the player tries to exit but only if it isn't already visible
+      if (!dialogBox.visible) {
+      // Set it to visible to it displays
+      dialogBox.visible = true;
+      // Set the string in the dialog box to the current string
+      dialogBox.string = dialogString;
+      // Set a timer to hide the dialog box by calling the hideDialog()
+      // function after the number of milliseconds specified by
+      // the dialog box's duration property
+      setTimeout(hideDialog, dialogBox.duration);
+      }
+    }
+    else if(score===3){
+      //the player wins is they get all the blueprints and exit
+      state = `win`;
+    }
+  }
+}
 
+function hideDialog(){
+  dialogBox.visible = false;
 }
 /**
 displays a dialog box
@@ -330,6 +353,19 @@ function lose() {
   text(`YOU LOST:( TRY AGAIN`, width / 2, height / 2);
   pop();
 }
+
+/**
+displays winning text
+*/
+function win() {
+  push();
+  textSize(45);
+  fill(0, 96, 255);
+  textAlign(CENTER, CENTER);
+  text(`YOU WON!! YOU GET TO KEEP YOUR JOB`, width / 2, height / 2);
+  pop();
+}
+
 
 /**
 checks if the player clicked during the title screen to start
