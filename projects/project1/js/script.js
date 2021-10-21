@@ -25,8 +25,8 @@ let score=0;
 //dialog
 let dialogString='hmm... Come back when you have all the missing blueprints';
 
-//the possible positions for the exit
-let exitPos=[50,950];
+//the possible positions in the Y axis for the exit
+let exitPosY=[50,950];
 
 //object representing dialog box
 //Base source code taken from -->  https://editor.p5js.org/pippinbarr/sketches/ceXeaUZO7
@@ -103,10 +103,10 @@ for (var i = 0; i <1; i++) {
   dialogBox.y = height/2;
 
   //position exit img at a random position taken from the array
-  const randomPos = Math.floor(Math.random() * exitPos.length);
-  console.log(randomPos, randomPos[random]);
+  const randomPosY = Math.floor(Math.random() * exitPosY.length);
+  console.log(randomPosY, randomPosY[random]);
   exit.x=width/2;
-  exit.y=height-exitPos[randomPos];
+  exit.y=height-exitPosY[randomPosY];
 }
 
 
