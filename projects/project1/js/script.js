@@ -9,8 +9,6 @@ This is my first project, you play as a plague doctor collecting health packs...
 
 //starts off the game with the title
 let state = `title`;
-
-
 //array to store blueprints
 let bpGrp = [];
 
@@ -82,6 +80,9 @@ function preload() {
   //SOURCE--------- me:)
   exit.image= loadImage("assets/images/exit.png");
 
+
+
+
 }
 
 /**
@@ -89,7 +90,7 @@ Description of setup
 */
 function setup(){
 createCanvas(windowWidth, windowHeight);
-
+textFont('Times');
 //spawning the player on the right-center of the screen
 player.x=width-150;
 player.y=height/2;
@@ -140,10 +141,13 @@ sets the title at the start
 */
 function title() {
   push();
-  textSize(64);
-  fill(200, 100, 100);
+  textSize(84);
+  textStyle(BOLD);
+  fill(0);
   textAlign(CENTER, CENTER);
-  text(`Left click to start`, width / 2, height / 2);
+  text(`Welcome`, width / 2, height / 2);
+  textSize(64);
+  text(`Left click to start`, width / 2, height / 2+150);
   pop();
 }
 
@@ -305,7 +309,7 @@ creates the second obstacle, the circles
 */
 function createObstacle2Shape(obstacle2){
   push();
-  fill(48, 57, 7);
+  fill(64, 76, 9);
   ellipseMode(CENTER);
   ellipse(obstacle2.x,obstacle2.y,obstacle2.sizeX, obstacle2.sizeY);
   pop();
@@ -350,7 +354,7 @@ creates the first obstacle, the rectangle
 */
 function createObstacle1Shape(obstacle){
   push();
-  fill(48, 57, 7);
+  fill(64, 76, 9);
   rect(obstacle.x,obstacle.y,obstacle.sizeX, obstacle.sizeY);
   if(score===1){
     firstBpPickedUp=true;
@@ -451,10 +455,11 @@ displays losing text
 */
 function lose() {
   push();
-  textSize(45);
-  fill(0, 96, 255);
+  textSize(84);
+  textStyle(BOLD);
+  fill(0);
   textAlign(CENTER, CENTER);
-  text(`YOU LOST:( TRY AGAIN`, width / 2, height / 2);
+  text(`You got infected...`, width / 2, height / 2);
   pop();
 }
 
@@ -463,10 +468,11 @@ displays winning text
 */
 function win() {
   push();
-  textSize(45);
-  fill(0, 96, 255);
+  textSize(85);
+  textStyle(BOLD);
+  fill(0);
   textAlign(CENTER, CENTER);
-  text(`YOU WON!! YOU GET TO KEEP YOUR JOB`, width / 2, height / 2);
+  text(`Now you can go "treat" you patient...`, width / 2, height / 2);
   pop();
 }
 
