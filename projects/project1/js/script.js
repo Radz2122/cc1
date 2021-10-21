@@ -101,26 +101,7 @@ for (var i = 0; i <1; i++) {
   obGrp.push(ob);
   }
 
-for (let i = 0; i<4; i++) {
-  //giving the circle a ranodm x and using the var for the circles that follow behind
-  let randomX=random(0,width);
-  let ob2=createObstacle2(randomX,height);
-  ob2Grp.push(ob2);
-  //second circles that will follow behind the main ones (like a train of circles)
-    for (let u = 0; u <1; u++) {
-      //height for second circle of the train
-      let height2=height-50;
-      let ob2After=createObstacle2(randomX,height2);
-      ob2Grp.push(ob2After);
-      //third circles that will follow behind the main ones (like a train of circles)
-        for (let o = 0; o <1; o++) {
-          //height for second circle of the train
-          let height3=height2-50;
-          let ob2After=createObstacle2(randomX,height3);
-          ob2Grp.push(ob2After);
-        }
-    }
-}
+generateCircles();
 
   // Position the dialog box with its centre in the centre of the canvas
   dialogBox.x = width/2;
@@ -180,6 +161,29 @@ function simulation() {
   //display exit img
   displayExit();
   // verifyScoreAddObstacle(); TO DOOOO ADD A REC
+}
+function generateCircles(){
+  //loops to generate the circles one after the other
+  for (let i = 0; i<4; i++) {
+    //giving the circle a ranodm x and using the var for the circles that follow behind
+    let randomX=random(0,width);
+    let ob2=createObstacle2(randomX,height);
+    ob2Grp.push(ob2);
+    //second circles that will follow behind the main ones (like a train of circles)
+      for (let u = 0; u <1; u++) {
+        //height for second circle of the train of circles
+        let height2=height-50;
+        let ob2After=createObstacle2(randomX,height2);
+        ob2Grp.push(ob2After);
+        //third circles that will follow behind the main ones (like a train of circles)
+          for (let o = 0; o <1; o++) {
+            //height for third circle of the train of circles
+            let height3=height2-50;
+            let ob3After=createObstacle2(randomX,height3);
+            ob2Grp.push(ob3After);
+          }
+      }
+  }
 }
 
 /**
@@ -286,11 +290,13 @@ displays the second obstacle, the circles
 function displayObstacle2(){
   for (let i = 0; i < ob2Grp.length; i++) {
     createObstacle2Shape(ob2Grp[i]);
+    moveObstacle2(ob2Grp[i]);
+    ;
   }
 }
 
 /**
-creates the first obstacle, the circles
+creates the second obstacle, the circles
 */
 function createObstacle2Shape(obstacle2){
   push();
@@ -298,6 +304,19 @@ function createObstacle2Shape(obstacle2){
   ellipseMode(CENTER);
   ellipse(obstacle2.x,obstacle2.y,obstacle2.sizeX, obstacle2.sizeY);
   pop();
+}
+
+/**
+moves the second obstacle, the circles
+*/
+function moveObstacle2(obstacle2){
+    obstacle2.y=obstacle2.y-obstacle2.speed;
+    console.log(ob2Grp);
+    if(obstacle2.y<-1900){
+      ob2Grp.splice(0,ob2Grp.length);
+      generateCircles();
+      console.log(ob2Grp);
+    }
 }
 
 /**
