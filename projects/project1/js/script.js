@@ -2,7 +2,7 @@
 Project 1
 Radhika Patel
 
-This is my first project, a spy/escape/infiltration simulation game
+This is my first project, you play as a plague doctor collecting health packs... Beware of the green germs..
 */
 
 "use strict";
@@ -26,7 +26,7 @@ let firstBpPickedUp=false;
 let score=0;
 
 //dialog
-let dialogString='hmm... Come back when you have all the missing blueprints';
+let dialogString='hmm... I think I had more of these';
 
 //the possible positions in the Y axis for the exit
 let exitPosY=[50,950];
@@ -42,8 +42,8 @@ let dialogBox = {
   // Whether it's currently visible on the canvas
   visible: false,
   // Dimensions
-  width: 200,
-  height: 100,
+  width: 300,
+  height: 200,
   // Padding
   padding: 20,
   // How long the dialog box should display before auto-closing
@@ -79,7 +79,7 @@ function preload() {
   // SOURCE------- https://www.artstation.com/artwork/WKDDxX
   player.image = loadImage("assets/images/plague.gif");
 
-  //SOURCE--------- http://pixelartmaker.com/art/32324ae8c4a7f02
+  //SOURCE--------- me:)
   exit.image= loadImage("assets/images/exit.png");
 
 }
