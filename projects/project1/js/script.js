@@ -60,8 +60,8 @@ let exit={
 //object that represents the player
 let player = {
   image: undefined,
-  x: 0,
-  y: 0,
+  x: undefined,
+  y: undefined,
   size: 100,
   vx: 0,
   vy: 0,
@@ -72,14 +72,11 @@ let player = {
   maxSpeed: 8
 };
 /**
-Description of preload
+Loads images
 */
 function preload() {
-  // SOURCE------- https://opengameart.org/content/animated-top-down-survivor-player
-  player.image = loadImage("assets/images/survivor-move_flashlight_0.png");
-
-  // // SOURCE------- https://www.seekpng.com/idown/u2w7r5u2w7y3t4o0_this-free-icons-png-design-of-simple-blueprints/
-  // bpImg= loadImage("assets/images/blueprint.png");
+  // SOURCE------- https://www.artstation.com/artwork/WKDDxX
+  player.image = loadImage("assets/images/plague.gif");
 
   //SOURCE--------- http://pixelartmaker.com/art/32324ae8c4a7f02
   exit.image= loadImage("assets/images/exit.png");
@@ -91,6 +88,10 @@ Description of setup
 */
 function setup(){
 createCanvas(windowWidth, windowHeight);
+
+//spawning the player
+player.x=width-150;
+player.y=height/2;
 //the game elements are generated
 for (let i = 0; i < 3; i++) {
   let bp = createBp(random(0, width),random(0, height));
