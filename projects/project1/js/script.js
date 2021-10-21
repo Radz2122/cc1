@@ -13,8 +13,10 @@ let state = `title`;
 //array to store blueprints
 let bpGrp = [];
 
-//array to store obstacle
+//array to store obstacle 1
 let obGrp=[];
+//array to store obstacle 2
+let ob2Grp=[];
 
 //checks if the player picked up a bp to start the first obstacle
 let firstBpPickedUp=false;
@@ -98,6 +100,10 @@ for (var i = 0; i <1; i++) {
   let ob=createObstacle(0,random(0,height),random(200,500));
   obGrp.push(ob);
   }
+for (var i = 0; i<2; i++) {
+  let ob2=createObstacle2(random(0,width),height,2);
+  ob2Grp.push(ob2);
+}
   // Position the dialog box with its centre in the centre of the canvas
   dialogBox.x = width/2;
   dialogBox.y = height/2;
@@ -150,6 +156,7 @@ function simulation() {
   displayBp();
   movePlayer();
   displayObstacle1();
+  displayObstacle2();
   // Display the dialog box
   displayDialog();
   //display exit img
@@ -244,7 +251,7 @@ function createObstacle(x,y,sizeY){
 /**
 stores info on the second obstacle and stores it
 */
-function createObstacle2(x,y.numAtk){
+function createObstacle2(x,y,numAtk){
   let obstacle2={
     x:x,
     y:y,
@@ -255,6 +262,26 @@ function createObstacle2(x,y.numAtk){
     numAtk:numAtk
   };
   return obstacle2;
+}
+
+/**
+displays the second obstacle, the circles
+*/
+function displayObstacle2(){
+  for (let i = 0; i < ob2Grp.length; i++) {
+    createObstacle2Shape(ob2Grp[i]);
+  }
+}
+
+/**
+creates the first obstacle, the circles
+*/
+function createObstacle2Shape(obstacle2){
+  push();
+  fill(0, 96, 255);
+  ellipseMode(CENTER);
+  ellipse(obstacle2.x,obstacle2.y,obstacle2.sizeX, obstacle2.sizeY);
+  pop();
 }
 
 /**
@@ -269,6 +296,10 @@ function displayObstacle1(){
     }
   }
 }
+
+/**
+creates the first obstacle, the rectangle
+*/
 function createObstacle1Shape(obstacle){
   push();
   fill(0, 96, 255);
