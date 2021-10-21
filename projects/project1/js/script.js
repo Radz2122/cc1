@@ -97,13 +97,31 @@ for (let i = 0; i < 3; i++) {
   bpGrp.push(bp);
   }
 for (var i = 0; i <1; i++) {
-  let ob=createObstacle(0,random(0,height),random(200,500));
+  let ob=createObstacle(0,random(0,height),random(500,700));
   obGrp.push(ob);
   }
-for (var i = 0; i<2; i++) {
-  let ob2=createObstacle2(random(0,width),height,2);
+
+for (let i = 0; i<4; i++) {
+  //giving the circle a ranodm x and using the var for the circles that follow behind
+  let randomX=random(0,width);
+  let ob2=createObstacle2(randomX,height);
   ob2Grp.push(ob2);
+  //second circles that will follow behind the main ones (like a train of circles)
+    for (let u = 0; u <1; u++) {
+      //height for second circle of the train
+      let height2=height-50;
+      let ob2After=createObstacle2(randomX,height2);
+      ob2Grp.push(ob2After);
+      //third circles that will follow behind the main ones (like a train of circles)
+        for (let o = 0; o <1; o++) {
+          //height for second circle of the train
+          let height3=height2-50;
+          let ob2After=createObstacle2(randomX,height3);
+          ob2Grp.push(ob2After);
+        }
+    }
 }
+
   // Position the dialog box with its centre in the centre of the canvas
   dialogBox.x = width/2;
   dialogBox.y = height/2;
@@ -251,15 +269,13 @@ function createObstacle(x,y,sizeY){
 /**
 stores info on the second obstacle and stores it
 */
-function createObstacle2(x,y,numAtk){
+function createObstacle2(x,y){
   let obstacle2={
     x:x,
     y:y,
     sizeX:30,
     sizeY:30,
-    speed:8,
-    //the amount of circles that are shot out
-    numAtk:numAtk
+    speed:8
   };
   return obstacle2;
 }
