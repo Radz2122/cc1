@@ -10,6 +10,7 @@ This is my first project, a spy/escape/infiltration simulation game
 //starts off the game with the title
 let state = `title`;
 
+
 //array to store blueprints
 let bpGrp = [];
 
@@ -89,7 +90,7 @@ Description of setup
 function setup(){
 createCanvas(windowWidth, windowHeight);
 
-//spawning the player
+//spawning the player on the right-center of the screen
 player.x=width-150;
 player.y=height/2;
 //the game elements are generated
@@ -119,7 +120,7 @@ for (var i = 0; i <1; i++) {
 Description of draw()
 */
 function draw() {
-background(0);
+background(16, 19, 2);
   if (state === `title`) {
     title();
   }
@@ -304,7 +305,7 @@ creates the second obstacle, the circles
 */
 function createObstacle2Shape(obstacle2){
   push();
-  fill(0, 96, 255);
+  fill(48, 57, 7);
   ellipseMode(CENTER);
   ellipse(obstacle2.x,obstacle2.y,obstacle2.sizeX, obstacle2.sizeY);
   pop();
@@ -349,7 +350,7 @@ creates the first obstacle, the rectangle
 */
 function createObstacle1Shape(obstacle){
   push();
-  fill(0, 96, 255);
+  fill(48, 57, 7);
   rect(obstacle.x,obstacle.y,obstacle.sizeX, obstacle.sizeY);
   if(score===1){
     firstBpPickedUp=true;
@@ -391,9 +392,14 @@ creates the bp and makes themn disappear once collected
 function createBpShape(bp){
   if (!bp.touched) {
     push();
-    fill(0, 96, 255);
     noStroke();
+    rectMode(CENTER);
+    fill(100);
     rect(bp.x, bp.y, bp.sizeX,bp.sizeY);
+    fill(100,0,0);
+    rect(bp.x, bp.y, bp.sizeX/2,bp.sizeY/4);
+    fill(100,0,0);
+    rect(bp.x, bp.y, bp.sizeX/4,bp.sizeY/1.5);
     pop();
   }
 }
