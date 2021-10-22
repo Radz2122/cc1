@@ -12,6 +12,9 @@ let state = `title`;
 //array to store blueprints
 let bpGrp = [];
 
+//background music
+let song;
+
 //array to store obstacle 1
 let obGrp=[];
 //array to store obstacle 2
@@ -79,14 +82,21 @@ function preload() {
 
   //SOURCE--------- me:)
   exit.image= loadImage("assets/images/exit.png");
+
+  //load the music
+  song=loadSound('assets/sounds/hollowKnightTheme.mp3');
 }
 
 /**
 Description of setup
 */
 function setup(){
+
+  //play the song
+song.play();
 createCanvas(windowWidth, windowHeight);
 textFont('Times');
+noStroke();
 //spawning the player on the right-center of the screen
 player.x=width-150;
 player.y=height/2;
@@ -151,6 +161,7 @@ function title() {
 calls the funciton needed to play
 */
 function simulation() {
+
   //display the player when the simulation starts
   image(player.image, player.x, player.y, player.size, player.size);
   displayBp();
