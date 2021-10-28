@@ -10,6 +10,7 @@ class Badball {
     this.maxSpeed = 10;
     this.size = 40;
     this.active = true;
+    this.touchedPaddle=false;
   }
 
   gravity(force) {
@@ -43,6 +44,9 @@ class Badball {
 
       this.vy = -this.vy;
       this.ay = 0;
+
+      //if it touched the paddle we change the state
+      this.touchedPaddle=true;
     }
   }
 
