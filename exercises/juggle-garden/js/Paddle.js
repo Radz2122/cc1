@@ -5,11 +5,22 @@ class Paddle {
     this.height = h;
     this.x = 0;
     this.y = height - this.height/2;
+    this.speed=10;
   }
 
   move() {
-    this.x = mouseX;
+  // if(keyIsDown===false){
+  //   this.x = mouseX;
+  // }
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+    this.x += this.speed;
   }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+    this.x -= this.speed;
+  }
+}
+
+
 
   display() {
     push();
