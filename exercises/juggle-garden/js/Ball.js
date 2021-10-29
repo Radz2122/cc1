@@ -11,27 +11,31 @@ class Ball {
     this.size = 40;
     this.active = true;
   }
-
+//applies a force to the balls
   gravity(force) {
     this.ay = this.ay + force;
   }
 
+//apply acceleraiton on the balls
   move() {
     this.vx = this.vx + this.ax;
     this.vy = this.vy + this.ay;
 
+//limit the max speed a ball can get
     this.vx = constrain(this.vx, -this.maxSpeed, this.maxSpeed);
     this.vy = constrain(this.vy, -this.maxSpeed, this.maxSpeed);
 
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
+//deactivate the ball if it falls out of the screen
     if (this.y - this.size/2 > height) {
       this.active = false;
 
     }
   }
 
+//make the balls bounce on the paddle
   bounce(paddle) {
     if (this.x > paddle.x - paddle.width/2 &&
         this.x < paddle.x + paddle.width/2 &&
@@ -47,6 +51,7 @@ class Ball {
     }
   }
 
+//displays the balls
   display() {
     push();
     fill(255,50,50);

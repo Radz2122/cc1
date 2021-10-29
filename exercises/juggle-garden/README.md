@@ -1,3 +1,7 @@
-# Template p5 project
+Juggle-Garden exercise
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Radhika Patel
+
+In this exercise, we explored classes. The goal of my game is to keep at least one red ball alive by the time the round ends (15 seconds). Also, avoid the blue balls!
+
+Move the paddle around with the left/right arrows or with A and D
