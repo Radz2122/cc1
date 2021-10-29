@@ -2,7 +2,7 @@
 Juggle-simulation
 Radhika Patel
 
-This is the juglging exercise.
+This is the juglging exercise made with classes.
 */
 
 "use strict";
@@ -12,6 +12,9 @@ let gravityForce = 0.0025;
 
 let paddle;
 
+//amount of time the game lasts in seconds
+let time=15;
+
 //var for the good balls
 let balls = [];
 let numBalls = 10;
@@ -20,24 +23,11 @@ let numBalls = 10;
 let badBalls = [];
 let numBadBalls = 3;
 
+
+//creates a new paddle and resets the game state
 function setup() {
   createCanvas(windowWidth,windowHeight);
-
   paddle = new Paddle(300,20);
-
-  for (let i = 0; i < numBalls; i++) {
-    let x = random(0,width);
-    let y = random(-400,-100);
-    let ball = new Ball(x,y);
-    balls.push(ball);
-  }
-
-  for (let i = 0; i < numBadBalls; i++) {
-    let x = random(0,width);
-    let y = random(-400,-100);
-    let badBall = new Badball(x,y);
-    badBalls.push(badBall);
-  }
   reset();
 }
 
@@ -61,6 +51,7 @@ function draw() {
 
 //Creates the game elements (balls and paddle) and displays them
 function simulation(){
+
   //calsl the paddles functions to move and display it
   paddle.move();
   paddle.display();
@@ -73,6 +64,12 @@ function simulation(){
       ball.move();
       ball.bounce(paddle);
       ball.display();
+    }
+    if((round(millis()/1000)===time)&& ball.active){
+      state = `win`;
+    }
+    else if((round(millis()/1000)===time)&& !ball.active){
+      state = `lose`;
     }
   }
 
@@ -90,9 +87,9 @@ function simulation(){
       state = `lose`;
     }
   }
-
-
 }
+
+//creates and displays the title
 function title(){
   push();
   textSize(45);
@@ -101,15 +98,28 @@ function title(){
   text(`Welcome`, width / 2, height / 2);
   pop();
 }
+
+//creates and displays the losing screen
 function lose() {
   push();
   textSize(45);
   fill(0, 96, 255);
   textAlign(CENTER, CENTER);
-  text(`YOU LOST:( TRY AGAIN`, width / 2, height / 2);
+  text(`YOU LOST:(Click to try again`, width / 2, height / 2);
   pop();
 }
 
+//creates and displays the winning screen
+function lose() {
+  push();
+  textSize(45);
+  fill(0, 96, 255);
+  textAlign(CENTER, CENTER);
+  text(`YOU WON!! Click to play again:)`, width / 2, height / 2);
+  pop();
+}
+
+//starts and restarts the game when the mouse button is clicked
   function mousePressed() {
     if (state === `title`) {
       state = `simulation`;
@@ -119,6 +129,7 @@ function lose() {
     }
   }
 
+//reset the values of the game variables once a new game is started
   function reset(){
     balls=[];
     badBalls=[];

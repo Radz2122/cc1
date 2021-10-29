@@ -9,9 +9,6 @@ class Paddle {
   }
 
   move() {
-  // if(keyIsDown===false){
-  //   this.x = mouseX;
-  // }
   if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
     this.x += this.speed;
   }
