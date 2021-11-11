@@ -1,9 +1,8 @@
 /**
-Title of Project
-Author Name
+Project 2
+Radhika Patel
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This is my final project, a matchmaking memory game with a twist 
 */
 
 "use strict";
