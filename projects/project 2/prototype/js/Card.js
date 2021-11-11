@@ -6,3 +6,13 @@ class Card{
     this.height=500;
   }
 }
+
+
+function display(){
+  push();
+  fill(255);
+  noStroke();
+  rectMode(CENTER);
+  rect(this.x, this.y, this.width, this.height);
+  pop();
+}
