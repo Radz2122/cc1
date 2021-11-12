@@ -2,7 +2,7 @@ class Card{
   constructor(x,y,nb){
     this.x=x;
     this.y=y;
-    this.nb= random(0,5);
+    this.nb=nb;
     this.width=150;
     this.height=200;
   }
