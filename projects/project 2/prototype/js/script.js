@@ -48,7 +48,10 @@ function game(){
   }
   for (let i = 0; i < copyCards.length; i++) {
     let copiedCard= copyCards[i];
-    copiedCard.display();
+    //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
+    copiedCard.displayCopy();
+
+
   }
 }
 
@@ -66,6 +69,7 @@ function createCardGrid(){
       let card = new Card(c * 280 + windowWidth/3.5, r * 280 + windowHeight/4,possiblePatterns[patternChoice]);
       cards.push(card);
       possiblePatterns.splice(patternChoice,1);
+      //copied the array
       arrayCopy(cards,0,copyCards,0,cards.length);
 
     }
