@@ -45,14 +45,57 @@ function game(){
   for (let i = 0; i < cards.length; i++) {
     let card= cards[i];
     card.display();
+    switch(card.nb){
+      case "pattern1":
+        //call the function that produces pattern 1
+        card.pattern1();
+        break;
+      case "pattern2":
+        //call the function that produces pattern 2
+        break;
+      case "pattern3":
+        //call the function that produces pattern 3
+        break;
+      case "pattern4":
+        //call the function that produces pattern 4
+        break;
+      case "pattern5":
+        //call the function that produces pattern 5
+        break;
+      case "pattern6":
+        //call the function that produces pattern 6
+        break;
+    }
   }
   for (let i = 0; i < copyCards.length; i++) {
     let copiedCard= copyCards[i];
     //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
+    //SOLUTION: make another display funciton but with an offset on the X position
     copiedCard.displayCopy();
-
-
+    // console.log(copiedCard.nb);
+      switch(copiedCard.nb){
+        case "pattern1":
+          //call the function that produces pattern 1
+          copiedCard.pattern1Copy();
+          break;
+        case "pattern2":
+          //call the function that produces pattern 2
+          break;
+        case "pattern3":
+          //call the function that produces pattern 3
+          break;
+        case "pattern4":
+          //call the function that produces pattern 4
+          break;
+        case "pattern5":
+          //call the function that produces pattern 5
+          break;
+        case "pattern6":
+          //call the function that produces pattern 6
+          break;
+      }
   }
+
 }
 
 //displays the cards in a grid
@@ -69,7 +112,8 @@ function createCardGrid(){
       let card = new Card(c * 280 + windowWidth/3.5, r * 280 + windowHeight/4,possiblePatterns[patternChoice]);
       cards.push(card);
       possiblePatterns.splice(patternChoice,1);
-      //copied the array
+      //copy the array
+      //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
       arrayCopy(cards,0,copyCards,0,cards.length);
 
     }

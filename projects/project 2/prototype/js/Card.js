@@ -22,4 +22,18 @@ class Card{
     rect(this.x+this.offset, this.y, this.width, this.height);
     pop();
   }
+  pattern1Copy(){
+    push();
+    fill(34,34,34);
+    rectMode(CENTER);
+    rect(this.x+this.offset, this.y, this.width, this.height);
+    pop();
+  }
+  pattern1(){
+    push();
+    fill(34,34,34);
+    rectMode(CENTER);
+    rect(this.x, this.y, this.width, this.height);
+    pop();
+  }
 }
