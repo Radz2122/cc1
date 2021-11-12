@@ -45,9 +45,12 @@ function game(){
   for (let i = 0; i < cards.length; i++) {
     let card= cards[i];
     card.display();
+    //the swithc detects which pattern to display but its a lot of repitition
+    //POSSIBLY find an alternative?
     switch(card.nb){
       case "pattern1":
         //call the function that produces pattern 1
+        //TEST
         card.pattern1();
         break;
       case "pattern2":
@@ -76,6 +79,7 @@ function game(){
       switch(copiedCard.nb){
         case "pattern1":
           //call the function that produces pattern 1
+          //TEST
           copiedCard.pattern1Copy();
           break;
         case "pattern2":
