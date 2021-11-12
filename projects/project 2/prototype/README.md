@@ -1,3 +1,3 @@
-# Template p5 project
+Project 2 Proposal Document
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This is my final project. It's a matchmaking memory game with 12 cards. The player has to pair up the cards on the screen through all 3 levels.
