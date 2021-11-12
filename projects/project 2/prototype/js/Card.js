@@ -1,7 +1,8 @@
 class Card{
-  constructor(x,y){
+  constructor(x,y,nb){
     this.x=x;
     this.y=y;
+    this.nb= random(0,5);
     this.width=150;
     this.height=200;
   }
