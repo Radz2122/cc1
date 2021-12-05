@@ -16,10 +16,10 @@ let copyCards=[];
 
 // How many rows and columns in the grid?
 let rows = 3;
-let cols = 2;
+let cols = 4;
 
 let patternChoice;
-let possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
+let possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6","pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
 
 /**
 Description of setup
@@ -70,35 +70,35 @@ function game(){
         break;
     }
   }
-  for (let i = 0; i < copyCards.length; i++) {
-    let copiedCard= copyCards[i];
-    //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
-    //SOLUTION: make another display funciton but with an offset on the X position
-    copiedCard.displayCopy();
-    // console.log(copiedCard.nb);
-      switch(copiedCard.nb){
-        case "pattern1":
-          //call the function that produces pattern 1
-          //TEST
-          copiedCard.pattern1Copy();
-          break;
-        case "pattern2":
-          //call the function that produces pattern 2
-          break;
-        case "pattern3":
-          //call the function that produces pattern 3
-          break;
-        case "pattern4":
-          //call the function that produces pattern 4
-          break;
-        case "pattern5":
-          //call the function that produces pattern 5
-          break;
-        case "pattern6":
-          //call the function that produces pattern 6
-          break;
-      }
-  }
+  // for (let i = 0; i < copyCards.length; i++) {
+  //   let copiedCard= copyCards[i];
+  //   //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
+  //   //SOLUTION: make another display funciton but with an offset on the X position
+  //   copiedCard.displayCopy();
+  //   // console.log(copiedCard.nb);
+  //     switch(copiedCard.nb){
+  //       case "pattern1":
+  //         //call the function that produces pattern 1
+  //         //TEST
+  //         copiedCard.pattern1Copy();
+  //         break;
+  //       case "pattern2":
+  //         //call the function that produces pattern 2
+  //         break;
+  //       case "pattern3":
+  //         //call the function that produces pattern 3
+  //         break;
+  //       case "pattern4":
+  //         //call the function that produces pattern 4
+  //         break;
+  //       case "pattern5":
+  //         //call the function that produces pattern 5
+  //         break;
+  //       case "pattern6":
+  //         //call the function that produces pattern 6
+  //         break;
+  //     }
+  // }
 
 }
 
@@ -118,10 +118,10 @@ function createCardGrid(){
       possiblePatterns.splice(patternChoice,1);
       //copy the array
       //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
-      arrayCopy(cards,0,copyCards,0,cards.length);
+      // arrayCopy(cards,0,copyCards,0,cards.length);
 
     }
   }
     console.log(cards);
-    console.log(copyCards);
+    console.log(possiblePatterns);
 }
