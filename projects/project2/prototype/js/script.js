@@ -55,6 +55,8 @@ function game(){
         break;
       case "pattern2":
         //call the function that produces pattern 2
+        // new Firstdesign()
+        card.pattern2();
         break;
       case "pattern3":
         //call the function that produces pattern 3
@@ -124,4 +126,13 @@ function createCardGrid(){
   }
     console.log(cards);
     console.log(possiblePatterns);
+}
+
+function mousePressed(){
+  for (let i = 0 ;i < cards.length; i++) {
+    let card= cards[i];
+    if (card.isUnderMouse(mouseX, mouseY)) {
+      console.log("yes");
+    }
+  }
 }

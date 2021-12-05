@@ -5,7 +5,7 @@ class Card{
     this.nb=nb;
     this.width=150;
     this.height=200;
-    this.offset=550;
+    this.isFaceUp=false;
   }
 //for now i did a display function  and a copy with its offset for the copied card
    display(){
@@ -15,25 +15,38 @@ class Card{
     rect(this.x, this.y, this.width, this.height);
     pop();
   }
-  displayCopy(){
-    push();
-    fill(255);
-    rectMode(CENTER);
-    rect(this.x+this.offset, this.y, this.width, this.height);
-    pop();
+
+  //TAKEN FORMM GITHUB
+  setIsFaceUp(isFaceUp) {
+    this.isFaceUp = isFaceUp
   }
 
-  //for now i did a pattern  and a copy with its offset for the copied card
-  pattern1Copy(){
-    push();
-    fill(34,34,34);
-    rectMode(CENTER);
-    rect(this.x+this.offset, this.y, this.width, this.height);
-    pop();
+  isUnderMouse(x, y) {
+    return x >= this.x && x <= this.x + this.width  &&
+    y >= this.y && y <= this.y + this.width
   }
+  //END TAKEN
+
   pattern1(){
+    if(this.isFaceUp===true){
+      push();
+      fill(34,56,34);
+      rectMode(CENTER);
+      rect(this.x, this.y, this.width, this.height);
+      pop();
+    }
+    else{
+      push();
+      fill(34,34,34);
+      rectMode(CENTER);
+      rect(this.x, this.y, this.width, this.height);
+      pop();
+    }
+
+  }
+  pattern2(){
     push();
-    fill(34,34,34);
+    fill(34,56,0);
     rectMode(CENTER);
     rect(this.x, this.y, this.width, this.height);
     pop();
