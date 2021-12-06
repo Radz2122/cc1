@@ -141,7 +141,11 @@ function mousePressed(){
         if (flippedCards[0].nb === flippedCards[1].nb) {
             console.log("its a match");
           }
+        setTimeout(resetArray,2000);
       }
     }
   }
+}
+function resetArray(){
+  flippedCards.splice(0,2);
 }
