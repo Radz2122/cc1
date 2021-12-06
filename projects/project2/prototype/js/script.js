@@ -20,7 +20,10 @@ let cols = 4;
 
 let patternChoice;
 let possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6","pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
- let flippedCards=[];
+let flippedCards=[];
+let points=0;
+
+
 /**
 Description of setup
 */
@@ -72,36 +75,6 @@ function game(){
         break;
     }
   }
-  // for (let i = 0; i < copyCards.length; i++) {
-  //   let copiedCard= copyCards[i];
-  //   //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
-  //   //SOLUTION: make another display funciton but with an offset on the X position
-  //   copiedCard.displayCopy();
-  //   // console.log(copiedCard.nb);
-  //     switch(copiedCard.nb){
-  //       case "pattern1":
-  //         //call the function that produces pattern 1
-  //         //TEST
-  //         copiedCard.pattern1Copy();
-  //         break;
-  //       case "pattern2":
-  //         //call the function that produces pattern 2
-  //         break;
-  //       case "pattern3":
-  //         //call the function that produces pattern 3
-  //         break;
-  //       case "pattern4":
-  //         //call the function that produces pattern 4
-  //         break;
-  //       case "pattern5":
-  //         //call the function that produces pattern 5
-  //         break;
-  //       case "pattern6":
-  //         //call the function that produces pattern 6
-  //         break;
-  //     }
-  // }
-
 }
 
 //displays the cards in a grid
@@ -149,15 +122,18 @@ function mousePressed(){
     }
   }
 }
+
 function resetChoiceFailed(){
-  flippedCards.splice(0,2);
-  for (let i = 0 ;i < cards.length; i++) {
-    let card= cards[i];
+
+  for (let i = 0 ;i < flippedCards.length; i++) {
+    let card= flippedCards[i];
     card.setIsFaceUp(false);
   }
+    flippedCards.splice(0,2);
 }
 
 function resetChoiceMatched(){
     flippedCards.splice(0,2);
-
+    points++;
+    console.log(points);
 }
