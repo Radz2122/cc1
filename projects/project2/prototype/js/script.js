@@ -20,7 +20,7 @@ let cols = 4;
 
 let patternChoice;
 let possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6","pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
-
+ let flippedCards=[];
 /**
 Description of setup
 */
@@ -125,14 +125,23 @@ function createCardGrid(){
     }
   }
     console.log(cards);
-    console.log(possiblePatterns);
+    // console.log(possiblePatterns);
 }
 
+//inspired by github code
 function mousePressed(){
   for (let i = 0 ;i < cards.length; i++) {
     let card= cards[i];
     if (card.isUnderMouse(mouseX, mouseY)) {
       console.log("yes");
+      if (flippedCards.length < 2 && !card.isFaceUp) {
+        card.setIsFaceUp(true);
+        flippedCards.push(card);
+        console.log(flippedCards);
+        if (flippedCards[0].nb === flippedCards[1].nb) {
+            console.log("its a match");
+          }
+      }
     }
   }
 }

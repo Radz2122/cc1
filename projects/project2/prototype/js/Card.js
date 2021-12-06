@@ -20,12 +20,18 @@ class Card{
   setIsFaceUp(isFaceUp) {
     this.isFaceUp = isFaceUp
   }
+//END TAKEN
 
   isUnderMouse(x, y) {
-    return x >= this.x && x <= this.x + this.width  &&
-    y >= this.y && y <= this.y + this.width
+    // return x >= this.x && x <= this.x + this.width  &&
+    // y >= this.y && y <= this.y + this.height
+    if (dist(this.x, this.y, x, y) < this.width/2) {
+     return true;
+   } else {
+     return false;
+   }
   }
-  //END TAKEN
+
 
   pattern1(){
     if(this.isFaceUp===true){
