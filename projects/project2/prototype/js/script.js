@@ -140,12 +140,24 @@ function mousePressed(){
         console.log(flippedCards);
         if (flippedCards[0].nb === flippedCards[1].nb) {
             console.log("its a match");
+            setTimeout(resetChoiceMatched,2000);
           }
-        setTimeout(resetArray,2000);
+          else{
+            setTimeout(resetChoiceFailed,2000);
+          }
       }
     }
   }
 }
-function resetArray(){
+function resetChoiceFailed(){
   flippedCards.splice(0,2);
+  for (let i = 0 ;i < cards.length; i++) {
+    let card= cards[i];
+    card.setIsFaceUp(false);
+  }
+}
+
+function resetChoiceMatched(){
+    flippedCards.splice(0,2);
+
 }
