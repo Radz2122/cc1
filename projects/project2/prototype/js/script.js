@@ -1,144 +1,41 @@
-/**
-Project 2
-Radhika Patel
+// A variable to store the currently active state object (starts empty)
+let currentState;
 
-This is my final project, a matchmaking memory game with a twist
-*/
-
-"use strict";
-
-//starts off the game with the game FOR NOW
-let state = `game`;
-//array that contains the first set of cards
-let cards = [];
-//array that will contain the copy of the first array to make pairs
-let copyCards=[];
-
-// How many rows and columns in the grid?
-let rows = 3;
-let cols = 4;
-
-let patternChoice;
-let possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6","pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
-let flippedCards=[];
-let points=0;
-
-
-/**
-Description of setup
-*/
+// setup()
+// Create the canvas, start our program in the title state, set default text style
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  createCardGrid();
 
+  // We can set the current state by creating a NEW object from the class
+  // representing that state! This will call its constructor() which will work
+  // like the `setup()` for that state.
+  currentState = new Title();
+
+  // Text settings
+  textSize(32);
+  textAlign(CENTER, CENTER);
 }
 
-
-/**
-Description of draw()
-*/
+// draw()
+// Simply call the draw method of the current state
 function draw() {
-  background(0);
-  if (state === `game`) {
-    game();
-  }
+  // If the current state is Title this will call the Title class draw()
+  // If the current state is Animation this will call the Animation class draw()
+  // if the current state is Ending this will call the Ending class draw()
+  currentState.draw();
 }
 
-//displays the game assets
-function game(){
-
-    for (let i = 0; i < cards.length; i++) {
-      let card= cards[i];
-      card.display();
-      //the swithc detects which pattern to display
-      switch(card.nb){
-        case "pattern1":
-          //call the function that produces pattern 1
-          //TEST
-          card.pattern1();
-          // const randomCard = Math.floor(Math.random() * cards.length);
-          // new Firstdesign(cards[randomCard].x,cards[randomCard].y,cards[randomCard].nb);
-          // cards[randomCard].display();
-          // cards.splice(randomCard,1);
-          // console.log(cards[randomCard].nb);
-          break;
-        case "pattern2":
-          //call the function that produces pattern 2
-          // new Firstdesign()
-          card.pattern2();
-          break;
-        case "pattern3":
-          //call the function that produces pattern 3
-          break;
-        case "pattern4":
-          //call the function that produces pattern 4
-          break;
-        case "pattern5":
-          //call the function that produces pattern 5
-          break;
-        case "pattern6":
-          //call the function that produces pattern 6
-          break;
-      }
-    }
+// keyPressed()
+// Call the keyPressed method of the current state
+// Note how even if the specific state itself DOESN'T define a keyPressed() method this
+// will work because they all extend the State class which does have one. For instance
+// neither Animation nor Ending define a keyPressed() method, but this still works
+// because they INHERIT the one from the State class.
+function keyPressed() {
+  // If the current state is Title this will call the Title class keyPressed()
+  // If the current state is Animation this will call the State class keyPressed()
+  // if the current state is Ending this will call the State class keyPressed()
+  currentState.keyPressed();
 }
-
-//displays the cards in a grid
-// code inspired by Pippin's grid: https://editor.p5js.org/pippinbarr/sketches/Xq3qsbQWA
-function createCardGrid(){
-  for (let c=0; c < cols; c++) {
-    for (let r =0 ;r< rows ;r++) {
-      //selectiing a possible pattern at random
-      const patternChoice = Math.floor(Math.random() * possiblePatterns.length);
-      //creating cards and pushing them into their array
-      // the multiplied value is the distance between the cards
-      //the addded value is the position of the entire card grid
-      //had to play around with the numbers to find the correct ones....
-      let card = new Firstdesign(c * 280 + windowWidth/3.5, r * 280 + windowHeight/4,possiblePatterns[patternChoice]);
-      cards.push(card);
-      possiblePatterns.splice(patternChoice,1);
-      //copy the array
-      //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
-      // arrayCopy(cards,0,copyCards,0,cards.length);
-
-    }
-  }
-    // console.log(cards);
-    // console.log(possiblePatterns);
-}
-
-//inspired by github code
 function mousePressed(){
-  for (let i = 0 ;i < cards.length; i++) {
-    let card= cards[i];
-    if (card.isUnderMouse(mouseX, mouseY)) {
-      console.log("yes");
-      if (flippedCards.length < 2 && !card.isFaceUp) {
-        card.setIsFaceUp(true);
-        flippedCards.push(card);
-        console.log(flippedCards);
-        if (flippedCards[0].nb === flippedCards[1].nb) {
-            console.log("its a match");
-            setTimeout(resetChoiceMatched,2000);
-          }
-          else{
-            setTimeout(resetChoiceFailed,2000);
-          }
-      }
-    }
-  }
-}
-
-function resetChoiceFailed(){
-  for (let i = 0 ;i < flippedCards.length; i++) {
-    let card= flippedCards[i];
-    card.setIsFaceUp(false);
-  }
-    flippedCards.splice(0,2);
-}
-
-function resetChoiceMatched(){
-    flippedCards.splice(0,2);
-    points++;
-    console.log(points);
+  currentState.mousePressed();
 }

@@ -1,4 +1,4 @@
-class Card{
+class Card extends FirstLvl{
   constructor(x,y,nb){
     this.x=x;
     this.y=y;
