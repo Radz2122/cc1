@@ -79,15 +79,19 @@ class FirstLvl extends State {
           break;
         case "pattern3":
           //call the function that produces pattern 3
+          this.pattern3(card);
           break;
         case "pattern4":
           //call the function that produces pattern 4
+          this.pattern4(card);
           break;
         case "pattern5":
           //call the function that produces pattern 5
+          this.pattern5(card);
           break;
         case "pattern6":
           //call the function that produces pattern 6
+          this.pattern6(card);
           break;
       }
     }
@@ -148,6 +152,74 @@ class FirstLvl extends State {
     } else {
       push();
       fill(50, 34, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      pop();
+    }
+  }
+  pattern3(card) {
+    if (card.isFaceUp === true) {
+      push();
+      fill(34, 56, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
+      pop();
+    } else {
+      push();
+      fill(34, 50, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      pop();
+    }
+  }
+  pattern4(card) {
+    if (card.isFaceUp === true) {
+      push();
+      fill(34, 56, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
+      pop();
+    } else {
+      push();
+      fill(34, 50, 44);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      pop();
+    }
+  }
+  pattern5(card) {
+    if (card.isFaceUp === true) {
+      push();
+      fill(34, 56, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
+      pop();
+    } else {
+      push();
+      fill(80, 50, 44);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      pop();
+    }
+  }
+  pattern6(card) {
+    if (card.isFaceUp === true) {
+      push();
+      fill(34, 56, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
+      pop();
+    } else {
+      push();
+      fill(100, 50, 44);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
@@ -253,11 +325,10 @@ class FirstLvl extends State {
             const keys = Object.values(this.flippedCards)
               for (const key of keys) {
                 console.log(key.isFaceUp);
-                this.resetChoiceFailed(key);
+                 setTimeout(this.resetChoiceFailed(key),4000);
                 this.flippedCards.splice(key, 1);
                   this.nbValues.splice(key, 1);
               }
-
           }
 
         }
@@ -267,7 +338,10 @@ class FirstLvl extends State {
 
   resetChoiceFailed(obj) {
     console.log("failedmatch");
-    this.setIsFaceUp(obj, false);
+    if(obj.isFaceUp===true){
+        this.setIsFaceUp(obj, false);
+    }
+
     // // this.flippedCards.splice(obj,1);
     // this.nbValues.splice(obj,1);
     // console.log(this.flippedCards);
