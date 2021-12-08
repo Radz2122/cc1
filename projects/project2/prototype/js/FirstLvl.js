@@ -180,6 +180,7 @@ constructor(){
           this.setIsFaceUp(card,true);
           this.flippedCards.push(card);
           this.nbValues.push(card.nb);
+
           if (this.flippedCards.length>=2 && this.nbValues[0]===this.nbValues[1]){
               console.log("its a match");
             this.flippedCards.splice(0,2);
@@ -202,7 +203,8 @@ constructor(){
 
 
    resetChoiceFailed(obj){
-     // console.log(obj.isFaceUp);
+     // this.setIsFaceUp(obj,false);
+     console.log(obj.isFaceUp);
 
 //      for (const prop in this.flippedCards) {
 //   if (this.flippedCards.hasOwnProperty(prop)) {
