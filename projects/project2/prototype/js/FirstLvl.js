@@ -217,13 +217,14 @@ class FirstLvl extends State {
 
   //inspired by github code
   mousePressed() {
+    let numLoops=0;
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       if (this.isUnderMouse(card, mouseX, mouseY)) {
-        console.log(card.isFaceUp);
+        // console.log(card.isFaceUp);
         if (this.flippedCards.length < 2 && !card.isFaceUp) {
           this.setIsFaceUp(card, true);
-          console.log(card.isFaceUp);
+          // console.log(card.isFaceUp);
           this.flippedCards.push(card);
           this.nbValues.push(card.nb);
 
@@ -236,20 +237,27 @@ class FirstLvl extends State {
             this.nbValues.splice(0, 2);
             this.points++;
             // console.log(this.points);
-          } else if (this.flippedCards.length >= 2) {
-            // console.log(this.flippedCards);
-            for (const prop in this.flippedCards) {
-  if (this.flippedCards.hasOwnProperty(prop)) {
-    console.log(this.flippedCards[prop]);
-    setTimeout(this.resetChoiceFailed(this.flippedCards[prop]), 4000);
-  }
+          } else if (this.flippedCards.length >= 2 && this.nbValues[0] !== this.nbValues[1]) {
+          // console.log(this.flippedCards);
+
+  for (const prop in this.flippedCards) {
+    // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+    numLoops++;
+    console.log(numLoops);
+
+    if(numLoops>=2){
+      this.flippedCards.splice(prop,2);
+      this.nbValues.splice(prop,2);
+    }
+    else{
+        this.resetChoiceFailed(this.flippedCards[prop]);
+    }
+
 }
-            // for (const prop in this.flippedCards) {
-            //   // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
-            //   console.log(this.flippedCards[prop]);
-            //   setTimeout(this.resetChoiceFailed(this.flippedCards[prop]), 4000);
-            // }
+
+
           }
+
         }
       }
     }
@@ -258,8 +266,8 @@ class FirstLvl extends State {
   resetChoiceFailed(obj) {
     console.log("hi");
     this.setIsFaceUp(obj, false);
-    this.flippedCards.splice(0, 2);
-    this.nbValues.splice(0, 2);
+    // // this.flippedCards.splice(obj,1);
+    // this.nbValues.splice(obj,1);
     console.log(this.flippedCards);
     // console.log("failedmatch");
   }
