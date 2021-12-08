@@ -7,6 +7,7 @@ This is my final project, a matchmaking memory game with a twist
 
 class FirstLvl extends State{
 
+
 constructor(){
 
   super();
@@ -97,6 +98,8 @@ constructor(){
       fill(34,56,34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
+      fill(0,56,34);
+      rect(card.x, card.y, card.width/2, card.height/2);
       pop();
     }
     else{
@@ -146,7 +149,7 @@ constructor(){
       // console.log(this.possiblePatterns);
   }
   /**
-  displays the second obstacle, the circles
+  displays the grid of cards
   */
    displayCardGrid() {
     for (let i = 0; i < this.cards.length; i++) {
@@ -155,7 +158,7 @@ constructor(){
   }
 
   /**
-  creates the second obstacle, the circles
+  draws the card grid
   */
    drawCardGrid(cardShape) {
     push();
@@ -172,11 +175,16 @@ constructor(){
       if (this.isUnderMouse(card,mouseX, mouseY)) {
         if (this.flippedCards.length < 2 && !card.isFaceUp) {
           this.setIsFaceUp(card,true);
-          this.flippedCards.push(card);
-          if (this.flippedCards[0].nb === this.flippedCards[1].nb) {
+          this.flippedCards.push(card.nb);
             console.log(this.flippedCards);
-              console.log("its a match");
-              setTimeout(this.resetChoiceMatched,2000);
+            // JSON.stringify(this.flippedCards);
+          if (this.isHeroEqual(this.flippedCards[0],this.flippedCards[1])){
+            // console.log(this.flippedCards);
+            //   console.log("its a match");
+            //   setTimeout(this.resetChoiceMatched,2000);
+            this.flippedCards.splice(0,2);
+            this.points++;
+            console.log(this.flippedCards);
             }
             else{
               setTimeout(this.resetChoiceFailed,2000);
@@ -184,11 +192,15 @@ constructor(){
         }
       }
     }
-    console.log(this.flippedCards);
+
   }
+   isHeroEqual(object1, object2) {
+  return object1 === object2;
+}
+
 
    resetChoiceFailed(){
-     console.log("failedmatch");
+     // console.log("failedmatch");
     for (let i = 0 ;i < this.flippedCards.length; i++) {
       let card= this.flippedCards[i];
       this.setIsFaceUp(card,false);
@@ -197,11 +209,11 @@ constructor(){
       this.flippedCards.splice(0,2);
   }
 
-   resetChoiceMatched(){
-      this.flippedCards.splice(0,2);
-      this.points++;
-      console.log(this.points);
-  }
+  //  resetChoiceMatched(){
+  //     this.flippedCards.splice(0,2);
+  //     this.points++;
+  //     console.log(this.points);
+  // }
 
   //TAKEN FORMM GITHUB
   setIsFaceUp(card,isFaceUp) {
