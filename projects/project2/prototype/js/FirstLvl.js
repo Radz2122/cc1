@@ -176,7 +176,15 @@ constructor(){
         if (this.flippedCards.length < 2 && !card.isFaceUp) {
           this.setIsFaceUp(card,true);
           this.flippedCards.push(card.nb);
-            console.log(this.flippedCards);
+            // console.log(this.flippedCards);
+
+            // let result = Object.keys(this.flippedCards).map((key) => [Number(key), this.flippedCards[key]]);
+          //   const  result2=Object.entries(this.flippedCards);
+          //   result2.forEach(([key, value]) => {
+          //   console.log(typeof key);
+          //   console.log(typeof value);
+          // });
+            // console.log(typeof result2);
             // JSON.stringify(this.flippedCards);
           if (this.isHeroEqual(this.flippedCards[0],this.flippedCards[1])){
             // console.log(this.flippedCards);
