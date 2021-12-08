@@ -184,7 +184,7 @@ constructor(){
           this.flippedCards.push(card);
           this.nbValues.push(card.nb);
 
-          if (this.flippedCards.length>=2 && this.nbValues[0]===this.nbValues[1]){
+           if (this.flippedCards.length>=2 && this.nbValues[0]===this.nbValues[1]){
               console.log("its a match");
             this.flippedCards.splice(0,2);
             this.points++;
