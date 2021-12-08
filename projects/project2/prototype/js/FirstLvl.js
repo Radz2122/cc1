@@ -177,16 +177,18 @@ constructor(){
     for (let i = 0 ;i < this.cards.length; i++) {
       let card= this.cards[i];
       if (this.isUnderMouse(card,mouseX, mouseY)) {
-
+        console.log(card.isFaceUp);
         if (this.flippedCards.length < 2 && !card.isFaceUp) {
 
           this.setIsFaceUp(card,true);
+          console.log(card.isFaceUp);
           this.flippedCards.push(card);
           this.nbValues.push(card.nb);
 
            if (this.flippedCards.length>=2 && this.nbValues[0]===this.nbValues[1]){
               console.log("its a match");
             this.flippedCards.splice(0,2);
+            this.nbValues.splice(0,2);
             this.points++;
             console.log(this.flippedCards);
             }
@@ -207,6 +209,8 @@ constructor(){
 
    resetChoiceFailed(obj){
      this.setIsFaceUp(obj,false);
+     this.flippedCards.splice(0,2);
+     this.nbValues.splice(0,2);
      console.log(obj.isFaceUp);
 
 //      for (const prop in this.flippedCards) {
