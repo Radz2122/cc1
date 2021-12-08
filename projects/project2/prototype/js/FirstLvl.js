@@ -68,14 +68,17 @@ constructor(){
           // console.log(cards[randomCard].nb);
           break;
         case "pattern2":
+
           //call the function that produces pattern 2
           // new Firstdesign()
           // card.pattern2();
           break;
         case "pattern3":
+
           //call the function that produces pattern 3
           break;
         case "pattern4":
+
           //call the function that produces pattern 4
           break;
         case "pattern5":
@@ -187,7 +190,7 @@ constructor(){
             this.points++;
             console.log(this.flippedCards);
             }
-            else{
+            else if (this.flippedCards.length>=2){
                    for (const prop in this.flippedCards) {
                 // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
                 setTimeout(this.resetChoiceFailed(this.flippedCards[prop]),2000);
@@ -203,7 +206,7 @@ constructor(){
 
 
    resetChoiceFailed(obj){
-     // this.setIsFaceUp(obj,false);
+     this.setIsFaceUp(obj,false);
      console.log(obj.isFaceUp);
 
 //      for (const prop in this.flippedCards) {
