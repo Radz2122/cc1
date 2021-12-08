@@ -23,6 +23,7 @@ constructor(){
   this.patternChoice;
   this.possiblePatterns=["pattern1","pattern2","pattern3","pattern4","pattern5","pattern6","pattern1","pattern2","pattern3","pattern4","pattern5","pattern6"];
   this.flippedCards=[];
+  this.nbValues=[];
   this.points=0;
 
 
@@ -173,48 +174,52 @@ constructor(){
     for (let i = 0 ;i < this.cards.length; i++) {
       let card= this.cards[i];
       if (this.isUnderMouse(card,mouseX, mouseY)) {
-        if (this.flippedCards.length < 2 && !card.isFaceUp) {
-          this.setIsFaceUp(card,true);
-          this.flippedCards.push(card.nb);
-            // console.log(this.flippedCards);
 
-            // let result = Object.keys(this.flippedCards).map((key) => [Number(key), this.flippedCards[key]]);
-          //   const  result2=Object.entries(this.flippedCards);
-          //   result2.forEach(([key, value]) => {
-          //   console.log(typeof key);
-          //   console.log(typeof value);
-          // });
-            // console.log(typeof result2);
-            // JSON.stringify(this.flippedCards);
-          if (this.isHeroEqual(this.flippedCards[0],this.flippedCards[1])){
-            // console.log(this.flippedCards);
-            //   console.log("its a match");
-            //   setTimeout(this.resetChoiceMatched,2000);
+        if (this.flippedCards.length < 2 && !card.isFaceUp) {
+
+          this.setIsFaceUp(card,true);
+          this.flippedCards.push(card);
+          this.nbValues.push(card.nb);
+          if (this.flippedCards.length>=2 && this.nbValues[0]===this.nbValues[1]){
+              console.log("its a match");
             this.flippedCards.splice(0,2);
             this.points++;
             console.log(this.flippedCards);
             }
             else{
-              setTimeout(this.resetChoiceFailed,2000);
+                   for (const prop in this.flippedCards) {
+                // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+                setTimeout(this.resetChoiceFailed(this.flippedCards[prop]),2000);
+              }
+
             }
         }
       }
     }
 
   }
-   isHeroEqual(object1, object2) {
-  return object1 === object2;
-}
 
 
-   resetChoiceFailed(){
-     // console.log("failedmatch");
-    for (let i = 0 ;i < this.flippedCards.length; i++) {
-      let card= this.flippedCards[i];
-      this.setIsFaceUp(card,false);
-    }
 
-      this.flippedCards.splice(0,2);
+   resetChoiceFailed(obj){
+     // console.log(obj.isFaceUp);
+
+//      for (const prop in this.flippedCards) {
+//   if (this.flippedCards.hasOwnProperty(prop)) {
+//     console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+//   }
+// }
+
+//      for (const prop in this.flippedCards) {
+//   console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+// }
+     console.log("failedmatch");
+
+    //   let card= this.flippedCards[i];
+    //   this.setIsFaceUp(card,false);
+    // }
+
+      // this.flippedCards.splice(0,2);
   }
 
   //  resetChoiceMatched(){
