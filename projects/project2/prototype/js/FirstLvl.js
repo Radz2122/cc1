@@ -72,7 +72,7 @@ class FirstLvl extends State {
           // console.log(cards[randomCard].nb);
           break;
         case "pattern2":
-        this.pattern2(card);
+          this.pattern2(card);
           //call the function that produces pattern 2
           // new Firstdesign()
           // card.pattern2();
@@ -112,6 +112,7 @@ class FirstLvl extends State {
       pop();
     }
   }
+  //inspired by  https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
   pattern2(card) {
     if (card.isFaceUp === true) {
       push();
@@ -120,30 +121,29 @@ class FirstLvl extends State {
       rect(card.x, card.y, card.width, card.height);
 
       // How many lines projecting from the center in a circle?
-      let lines = 100;
+      let lines = 50;
 
- // Translate to the centre for rotation purposes
- translate(card.x, card.y);
- // A light stroke
- stroke(200);
- // Loop through all the lines we need to draw
- for (let i = 0; i < lines; i++) {
-   // Rotate by one increment based on the number of lines there are
-   rotate(TWO_PI/lines);
-   // Calculate the time parameter for this line based on the base
-   // plus a number based on the line number in the loop
+      // Translate to the centre for rotation purposes
+      translate(card.x, card.y);
+      // A light stroke
+      stroke(200);
+      // Loop through all the lines we need to draw
+      for (let i = 0; i < lines; i++) {
+        // Rotate by one increment based on the number of lines there are
+        rotate(TWO_PI / lines);
+        // Calculate the time parameter for this line based on the base
+        // plus a number based on the line number in the loop
 
-   // Calculate the length of the line based on the time parameter
-   // so it waves
-   let length = random(2,card.width/2);
-   // A slightly light stroke weight
-   strokeWeight(0.75);
-   // Draw the line!
-   line(0, 0, length, 3);
-   // Draw a point at the end of the line for a little visual flourish
-   // point(length + 5, 0);
- }
-
+        // Calculate the length of the line based on the time parameter
+        // so it waves
+        let length = random(2, card.width / 2);
+        // A slightly light stroke weight
+        strokeWeight(0.75);
+        // Draw the line!
+        line(0, 0, length, 3);
+        // Draw a point at the end of the line for a little visual flourish
+        // point(length + 5, 0);
+      }
       pop();
     } else {
       push();
@@ -235,12 +235,20 @@ class FirstLvl extends State {
             this.flippedCards.splice(0, 2);
             this.nbValues.splice(0, 2);
             this.points++;
-            console.log(this.points);
+            // console.log(this.points);
           } else if (this.flippedCards.length >= 2) {
+            // console.log(this.flippedCards);
             for (const prop in this.flippedCards) {
-              // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
-              setTimeout(this.resetChoiceFailed(this.flippedCards[prop]), 2000);
-            }
+  if (this.flippedCards.hasOwnProperty(prop)) {
+    console.log(this.flippedCards[prop]);
+    setTimeout(this.resetChoiceFailed(this.flippedCards[prop]), 4000);
+  }
+}
+            // for (const prop in this.flippedCards) {
+            //   // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+            //   console.log(this.flippedCards[prop]);
+            //   setTimeout(this.resetChoiceFailed(this.flippedCards[prop]), 4000);
+            // }
           }
         }
       }
@@ -248,11 +256,12 @@ class FirstLvl extends State {
   }
 
   resetChoiceFailed(obj) {
+    console.log("hi");
     this.setIsFaceUp(obj, false);
     this.flippedCards.splice(0, 2);
     this.nbValues.splice(0, 2);
-    console.log(obj.isFaceUp);
-    console.log("failedmatch");
+    console.log(this.flippedCards);
+    // console.log("failedmatch");
   }
 
   //TAKEN FORMM GITHUB
