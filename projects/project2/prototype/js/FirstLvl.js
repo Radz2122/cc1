@@ -237,24 +237,26 @@ class FirstLvl extends State {
             this.nbValues.splice(0, 2);
             this.points++;
             // console.log(this.points);
-          } else if (this.flippedCards.length >= 2 && this.nbValues[0] !== this.nbValues[1]) {
+          } else if (this.flippedCards.length >=2 && this.nbValues[0] !== this.nbValues[1]) {
           // console.log(this.flippedCards);
 
-  for (const prop in this.flippedCards) {
-    // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
-    numLoops++;
-    console.log(numLoops);
-
-    if(numLoops>=2){
-      this.flippedCards.splice(prop,2);
-      this.nbValues.splice(prop,2);
-    }
-    else{
-        this.resetChoiceFailed(this.flippedCards[prop]);
-    }
-
-}
-
+            // for (const prop in this.flippedCards) {
+            //   // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
+            //   console.log(typeof prop);
+            //   console.log(prop);
+            //
+            //   this.flippedCards.splice(prop, 1);
+            //   this.nbValues.splice(prop, 1);
+            //
+            //   this.resetChoiceFailed(this.flippedCards[prop]);
+            // }
+            const keys = Object.values(this.flippedCards)
+              for (const key of keys) {
+                console.log(key.isFaceUp);
+                this.resetChoiceFailed(key);
+                this.flippedCards.splice(key, 1);
+                  this.nbValues.splice(key, 1);
+              }
 
           }
 
@@ -264,11 +266,11 @@ class FirstLvl extends State {
   }
 
   resetChoiceFailed(obj) {
-    console.log("hi");
+    console.log("failedmatch");
     this.setIsFaceUp(obj, false);
     // // this.flippedCards.splice(obj,1);
     // this.nbValues.splice(obj,1);
-    console.log(this.flippedCards);
+    // console.log(this.flippedCards);
     // console.log("failedmatch");
   }
 
