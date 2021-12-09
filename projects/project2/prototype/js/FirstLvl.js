@@ -13,7 +13,7 @@ class FirstLvl extends State {
     //array that contains the first set of cards
 
     this.cards = [];
-
+    this.delay=3000;
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
@@ -290,9 +290,7 @@ class FirstLvl extends State {
 
   //inspired by github code
   mousePressed() {
-
-
-    let numLoops=0;
+    let numLoops = 0;
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       if (this.isUnderMouse(card, mouseX, mouseY)) {
@@ -307,44 +305,30 @@ class FirstLvl extends State {
             this.flippedCards.length >= 2 &&
             this.nbValues[0] === this.nbValues[1]
           ) {
-
             console.log("its a match");
             this.flippedCards.splice(0, 2);
             this.nbValues.splice(0, 2);
             this.points++;
             // console.log(this.points);
-          } else if (this.flippedCards.length >=2 && this.nbValues[0] !== this.nbValues[1]) {
-          // console.log(this.flippedCards);
+          } else if (
+            this.flippedCards.length >= 2 &&
+            this.nbValues[0] !== this.nbValues[1]
+          ) {
 
-            // for (const prop in this.flippedCards) {
-            //   // console.log(`obj.${prop} = ${this.flippedCards[prop]}`);
-            //   console.log(typeof prop);
-            //   console.log(prop);
-            //
-            //   this.flippedCards.splice(prop, 1);
-            //   this.nbValues.splice(prop, 1);
-            //
-            //   this.resetChoiceFailed(this.flippedCards[prop]);
-            // }
+            console.log(this.delayStartFC);
+            const keys = Object.values(this.flippedCards);
+            for (const key of keys) {
+              console.log(key.isFaceUp);
+              setTimeout(() => {
 
-                  console.log(this.delayStartFC);
-            const keys = Object.values(this.flippedCards)
-              for (const key of keys) {
-                console.log(key.isFaceUp);
-                setTimeout(() => {  // <-- use arrow function here
-console.log("itworked");
-this.resetChoiceFailed(key);
-//Prints as true after 10 seconds
-}, 2000);
+                console.log("itworked");
+                this.resetChoiceFailed(key);
+              }, this.delay);
 
-
-                this.flippedCards.splice(key, 1);
-                  this.nbValues.splice(key, 1);
-
-              }
-
+              this.flippedCards.splice(key, 1);
+              this.nbValues.splice(key, 1);
+            }
           }
-
         }
       }
     }
@@ -352,22 +336,11 @@ this.resetChoiceFailed(key);
 
   resetChoiceFailed(obj) {
     // console.log("failedmatch");
-    if(obj.isFaceUp===true){
-      console.log("itsfacrup");
-
-    this.setIsFaceUp(obj, false);
-    console.log("intheloop");
-
-
- }
-
+    if (obj.isFaceUp === true) {
+      this.setIsFaceUp(obj, false);
+      console.log("intheloop");
     }
-// // this.flippedCards.splice(obj,1);
-    // this.nbValues.splice(obj,1);
-    // console.log(this.flippedCards);
-    // console.log("failedmatch");
-
-
+  }
 
   //TAKEN FORMM GITHUB
   setIsFaceUp(card, isFaceUp) {
