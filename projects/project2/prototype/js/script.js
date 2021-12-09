@@ -27,8 +27,10 @@ function setup() {
   //sound
   userStartAudio();
   peaks = backMusic.getPeaks(windowWidth);
-  // backMusic.play(); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+  //PLAY MUSIC!!!!!!!!!!!!!!
+ // backMusic.play();
+// backMusic.loop();
+// backMusic.setVolume(0.4);
 }
 
 // draw()
