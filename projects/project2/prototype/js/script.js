@@ -1,10 +1,17 @@
 // A variable to store the currently active state object (starts empty)
 let currentState;
 let img;
+let backMusic;
+//to store array of peaks
+let peaks;
 
   function preload(){
     //image source= https://www.pinterest.ca/pin/553520610445431813/
     img=loadImage('assets/images/dog.jpg');
+
+    // sound source: https://www.youtube.com/watch?v=EUepTfZbEiQ
+    backMusic = loadSound(`assets/sounds/gameOver.mp3`);
+
   }
 
 // setup()
@@ -19,6 +26,12 @@ function setup() {
   // Text settings
   textSize(32);
   textAlign(CENTER, CENTER);
+
+  //sound
+  userStartAudio();
+  peaks = backMusic.getPeaks(windowWidth);
+  // backMusic.play();
+
 }
 
 // draw()

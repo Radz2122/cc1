@@ -42,14 +42,14 @@ class FirstLvl extends State {
 
     createCanvas(windowWidth, windowHeight);
     this.createCardGrid();
+
+
   }
 
   /**
   Description of setup
   */
-  // function setup() {
 
-  // }
 
   /**
   Description of draw()
@@ -57,6 +57,26 @@ class FirstLvl extends State {
   draw() {
     super.draw();
     background(0);
+
+          // background
+          push();
+         stroke(20, 20, 60, 100);
+         // Run through every peak in the array
+         for (let i = 0; i < peaks.length; i++) {
+           // Get the current peak data
+           let peak = peaks[i];
+           // Map the data to a y position. The peak data is between -1 and 1
+           // but we want to display it on the canvas, so we map to a number
+           // between 0 and height
+           let y = map(peak, -1, 1, 0, height);
+           // Draw a line from the center of the canvas to the mapped peak value
+           // with an x set to "i" because we're going through an array the
+           // width of the canvas...
+           // translate(card.x, card.y);
+           line(i, height/2, i,y);
+
+         }
+         pop();
     this.displayCardGrid();
     this.checkEnding();
     for (let i = 0; i < this.cards.length; i++) {
@@ -67,19 +87,10 @@ class FirstLvl extends State {
         case "pattern1":
           this.pattern1(card);
           //call the function that produces pattern 1
-          //TEST
-          // card.pattern1();
-          // const randomCard = Math.floor(Math.random() * cards.length);
-          // new Firstdesign(cards[randomCard].x,cards[randomCard].y,cards[randomCard].nb);
-          // cards[randomCard].display();
-          // cards.splice(randomCard,1);
-          // console.log(cards[randomCard].nb);
           break;
         case "pattern2":
           this.pattern2(card);
           //call the function that produces pattern 2
-          // new Firstdesign()
-          // card.pattern2();
           break;
         case "pattern3":
           //call the function that produces pattern 3
@@ -98,6 +109,7 @@ class FirstLvl extends State {
           this.pattern6(card);
           break;
       }
+
     }
   }
 
@@ -106,21 +118,23 @@ class FirstLvl extends State {
   //DO SMT GSOUND RELATEDDDDDDDDD
   //REMOVE ALL ELESE FORM PATTERNS AND PUT INTO ONE FUCNTION
   pattern1(card) {
-    if (card.isFaceUp === true) {
+    // if (card.isFaceUp === true) {
+    //   push();
+    //   fill(34, 56, 34);
+    //   rectMode(CENTER);
+    //   rect(card.x, card.y, card.width, card.height);
+    //   fill(0, 56, 34);
+    //   rect(card.x, card.y, card.width / 2, card.height / 2);
+    //   pop();
+    // } else {
       push();
-      fill(34, 56, 34);
+      fill(250, 34, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
       pop();
-    } else {
-      push();
-      fill(34, 34, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
-    }
+
+
+    // }
   }
   //inspired by  https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
   pattern2(card) {
@@ -415,7 +429,7 @@ class FirstLvl extends State {
   }
 
   checkEnding(){
-    if(this.points>1){
+    if(this.points>3){
       currentState= new SecondLvl();
     }
   }
