@@ -14,12 +14,10 @@ class FirstLvl extends State {
 
     this.cards = [];
     this.delay = 2000;
-    this.canTurnCard=true;
+    this.canTurnCard = true;
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
-
-
 
     this.patternChoice;
     this.possiblePatterns = [
@@ -42,14 +40,11 @@ class FirstLvl extends State {
 
     createCanvas(windowWidth, windowHeight);
     this.createCardGrid();
-
-
   }
 
   /**
   Description of setup
   */
-
 
   /**
   Description of draw()
@@ -58,25 +53,24 @@ class FirstLvl extends State {
     super.draw();
     background(0);
 
-          // background inspired by: https://pippinbarr.github.io/cc/1/topics/sound/reintroducing-p5-sound.html#getpeaks
-          push();
-         stroke(20, 20, 60, 100);
-         // Run through every peak in the array
-         for (let i = 0; i < peaks.length; i++) {
-           // Get the current peak data
-           let peak = peaks[i];
-           // Map the data to a y position. The peak data is between -1 and 1
-           // but we want to display it on the canvas, so we map to a number
-           // between 0 and height
-           let y = map(peak, -1, 1, 0, height);
-           // Draw a line from the center of the canvas to the mapped peak value
-           // with an x set to "i" because we're going through an array the
-           // width of the canvas...
-           // translate(card.x, card.y);
-           line(i, height/2, i,y);
-
-         }
-         pop();
+    // background inspired by: https://pippinbarr.github.io/cc/1/topics/sound/reintroducing-p5-sound.html#getpeaks
+    push();
+    stroke(20, 20, 60, 100);
+    // Run through every peak in the array
+    for (let i = 0; i < peaks.length; i++) {
+      // Get the current peak data
+      let peak = peaks[i];
+      // Map the data to a y position. The peak data is between -1 and 1
+      // but we want to display it on the canvas, so we map to a number
+      // between 0 and height
+      let y = map(peak, -1, 1, 0, height);
+      // Draw a line from the center of the canvas to the mapped peak value
+      // with an x set to "i" because we're going through an array the
+      // width of the canvas...
+      // translate(card.x, card.y);
+      line(i, height / 2, i, y);
+    }
+    pop();
     this.displayCardGrid();
     this.checkEnding();
     for (let i = 0; i < this.cards.length; i++) {
@@ -109,7 +103,6 @@ class FirstLvl extends State {
           this.pattern6(card);
           break;
       }
-
     }
   }
 
@@ -117,19 +110,15 @@ class FirstLvl extends State {
   game() {}
   //REMOVE ALL ELESE FORM PATTERNS AND PUT INTO ONE FUCNTION
   pattern1(card) {
-    // if (card.isFaceUp === true) {
-    //   push();
-    //   fill(34, 56, 34);
-    //   rectMode(CENTER);
-    //   rect(card.x, card.y, card.width, card.height);
-    //   fill(0, 56, 34);
-    //   rect(card.x, card.y, card.width / 2, card.height / 2);
-    //   pop();
-    // } else {
+    noStroke();
+    if (card.isFaceUp === true) {
       push();
-      fill(250, 34, 34);
+      fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
+      blendMode(DIFFERENCE);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
       pop();
       push();
       blendMode(BLEND);
@@ -139,53 +128,55 @@ class FirstLvl extends State {
       // Set x-or / difference blend mode
       blendMode(DIFFERENCE);
 
-      noStroke();
       // Center of card
       const x = card.x;
       const y = card.y;
 
       // Fraction of screen dim
-      const dim = min(card.width/2, card.height/2);
+      const dim = min(card.width / 2, card.height / 2);
       const size = dim * 0.5;
 
-push();
-blendMode(DIFFERENCE);
+      push();
+      blendMode(DIFFERENCE);
       rectMode(CENTER);
-      translate(x,y);
-    rotate(frameCount * 0.020);
+      translate(x, y);
+      rotate(frameCount * 0.02);
 
-      rect(card.width/6, card.height /6, size/2, size/2);
-pop();
-push();
-blendMode(DIFFERENCE);
+      rect(card.width / 6, card.height / 6, size / 2, size / 2);
+      pop();
+      push();
+      blendMode(DIFFERENCE);
       rectMode(CENTER);
-      translate(x,y);
-    rotate(-frameCount * 0.020);
-    // ellipse(,, size / 2, size / 2);
-      rect(card.width/6, card.height /6, size/2, size/2);
-pop();
-push();
-blendMode(DIFFERENCE);
+      translate(x, y);
+      rotate(-frameCount * 0.02);
+      // ellipse(,, size / 2, size / 2);
+      rect(card.width / 6, card.height / 6, size / 2, size / 2);
+      pop();
+      push();
+      blendMode(DIFFERENCE);
       rectMode(CENTER);
-      translate(x,y);
-    rotate(-frameCount * 0.015);
-    // ellipse(,, size / 2, size / 2);
-      rect(card.width/6, card.height /6, size, size);
-pop();
-push();
-blendMode(DIFFERENCE);
+      translate(x, y);
+      rotate(-frameCount * 0.015);
+      // ellipse(,, size / 2, size / 2);
+      rect(card.width / 6, card.height / 6, size, size);
+      pop();
+      push();
+      blendMode(DIFFERENCE);
       rectMode(CENTER);
-      translate(x,y);
-    rotate(frameCount * 0.015);
-    // ellipse(,, size / 2, size / 2);
-      rect(card.width/6, card.height /6, size, size);
-pop();
+      translate(x, y);
+      rotate(frameCount * 0.015);
+      // ellipse(,, size / 2, size / 2);
+      rect(card.width / 6, card.height / 6, size, size);
+      pop();
 
-
-        pop();
-
-
-    // }
+      pop();
+    } else {
+      push();
+      fill(250, 34, 34);
+      rectMode(CENTER);
+      rect(card.x, card.y, card.width, card.height);
+      pop();
+    }
   }
   //inspired by  https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
   pattern2(card) {
@@ -258,7 +249,7 @@ pop();
 
       // Create a circle slightly offset down and right
       push();
-      translate(x,y);
+      translate(x, y);
       rotate(frameCount * 0.025);
       ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
       pop();
@@ -302,7 +293,6 @@ pop();
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
-
     }
   }
   pattern5(card) {
@@ -315,7 +305,7 @@ pop();
       rect(card.x, card.y, card.width, card.height);
       push();
       textSize(60);
-      text("😠", card.x+ random(-1, 1), card.y+ random(-1, 1));
+      text("😠", card.x + random(-1, 1), card.y + random(-1, 1));
       pop();
       pop();
     } else {
@@ -324,11 +314,11 @@ pop();
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
-
     }
   }
+  //i tested a few things to create this effect
   pattern6(card) {
-    let blendModes=[];
+    let blendModes = [];
     if (card.isFaceUp === true) {
       push();
       fill(34, 56, 34);
@@ -337,21 +327,26 @@ pop();
       fill(0, 56, 34);
       rect(card.x, card.y, card.width / 2, card.height / 2);
       pop();
+      push();
+      translate(card.x, card.y);
+      noStroke();
+      blendModes = [DIFFERENCE, MULTIPLY, BLEND];
+      let randomBlendMode =
+        blendModes[Math.floor(Math.random() * blendModes.length)];
+      blendMode(randomBlendMode);
+      for (let i = 0; i < 10; i++) {
+        // translate(x, y);
+        rotate(frameCount * 0.015);
+        fill(250, 34, 34);
+        ellipse(card.width / 8, card.height / 8, 10, 50);
+        rotate(PI / 8);
+      }
+      pop();
     } else {
       push();
       fill(100, 50, 44);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      pop();
-      push();
-      //tried seeing if i could change blendmodes randomly from array MIGHT CHASNGE
-      blendModes=[DIFFERENCE,MULTIPLY,BLEND];
-      let randomBlendMode = blendModes[Math.floor(Math.random() * blendModes.length)];
-      blendMode(randomBlendMode);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
-      fill(0, 34, 34);
-      rect(card.x-10, card.y-10, card.width / 2, card.height / 2);
       pop();
     }
   }
@@ -417,7 +412,11 @@ pop();
       let card = this.cards[i];
       if (this.isUnderMouse(card, mouseX, mouseY)) {
         // console.log(card.isFaceUp);
-        if (this.flippedCards.length < 2 && !card.isFaceUp && this.canTurnCard) {
+        if (
+          this.flippedCards.length < 2 &&
+          !card.isFaceUp &&
+          this.canTurnCard
+        ) {
           this.setIsFaceUp(card, true);
           // console.log(card.isFaceUp);
           this.flippedCards.push(card);
@@ -428,7 +427,7 @@ pop();
             this.nbValues[0] === this.nbValues[1]
           ) {
             console.log("its a match");
-            this.canTurnCard=true;
+            this.canTurnCard = true;
             this.flippedCards.splice(0, 2);
             this.nbValues.splice(0, 2);
             this.points++;
@@ -437,7 +436,7 @@ pop();
             this.flippedCards.length >= 2 &&
             this.nbValues[0] !== this.nbValues[1]
           ) {
-            this.canTurnCard=false;
+            this.canTurnCard = false;
             const keys = Object.values(this.flippedCards);
             for (const key of keys) {
               console.log(key.isFaceUp);
@@ -450,17 +449,15 @@ pop();
             }
           }
         }
-
       }
     }
   }
 
   resetChoiceFailed(obj) {
-      this.canTurnCard=true;
+    this.canTurnCard = true;
     // console.log("failedmatch");
     if (obj.isFaceUp === true) {
       this.setIsFaceUp(obj, false);
-
     }
   }
 
@@ -479,9 +476,9 @@ pop();
     }
   }
 
-  checkEnding(){
-    if(this.points>3){
-      currentState= new SecondLvl();
+  checkEnding() {
+    if (this.points > 3) {
+      currentState = new SecondLvl();
     }
   }
 }
