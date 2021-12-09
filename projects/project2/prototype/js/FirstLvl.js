@@ -223,8 +223,10 @@ class FirstLvl extends State {
       fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
+      pop();
+      push();
+      imageMode(CENTER);
+      image(img, card.x, card.y, card.width, card.height);
       pop();
     } else {
       push();
@@ -232,22 +234,21 @@ class FirstLvl extends State {
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
-      push();
-      imageMode(CENTER);
-      image(img, card.x, card.y, card.width, card.height);
-      pop();
+
     }
   }
   pattern5(card) {
     //SOURCE: https://happycoding.io/examples/p5js/input/grouchy-face
-  //  USE THISS   // text("😠", width / 2 + random(-10, 10), height / 2 + random(-10, 10));
+
     if (card.isFaceUp === true) {
       push();
       fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
+      push();
+      textSize(60);
+      text("😠", card.x+ random(-1, 1), card.y+ random(-1, 1));
+      pop();
       pop();
     } else {
       push();
@@ -255,6 +256,7 @@ class FirstLvl extends State {
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
+
     }
   }
   pattern6(card) {
