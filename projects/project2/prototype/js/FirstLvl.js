@@ -13,7 +13,7 @@ class FirstLvl extends State {
     //array that contains the first set of cards
 
     this.cards = [];
-    this.delay=3000;
+    this.delay = 3000;
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
@@ -158,20 +158,59 @@ class FirstLvl extends State {
       pop();
     }
   }
+
+  //inspired by https://glitch.com/edit/#!/p5-example-xor?path=sketch.js%3A17%3A0
   pattern3(card) {
     if (card.isFaceUp === true) {
       push();
       fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
+
+      blendMode(BLEND);
+      // Set foreground as white
+      fill(255);
+
+      // Set x-or / difference blend mode
+      blendMode(DIFFERENCE);
+
+      noStroke();
+      // Center of card
+      const x = card.x;
+      const y = card.y;
+
+      // Fraction of screen dim
+      const dim = min(card.width, card.height);
+      const size = dim * 0.5;
+
+      rectMode(CENTER);
+      rect(x, y, size, size);
+
+      // Create a circle slightly offset down and right
+      push();
+      translate(card.x, card.y);
+      rotate(frameCount * 0.025);
+      ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
+      pop();
+
+      // Create a triangle slightly offset up and left
+      translate(-size / 4, -size / 4);
+      triangle(
+        x,
+        y - size / 2,
+        x + size / 2,
+        y + size / 2,
+        x - size / 2,
+        y + size / 2
+      );
+
       pop();
     } else {
       push();
       fill(34, 50, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
+
       pop();
     }
   }
@@ -259,14 +298,8 @@ class FirstLvl extends State {
         );
         this.cards.push(card);
         this.possiblePatterns.splice(patternChoice, 1);
-        // console.log(this.cards);
-        //copy the array
-        //PROBLEM:since the array is the exact same the x positions of the cards in the copy have to be changed or we cant see them...
-        // arrayCopy(cards,0,copyCards,0,cards.length);
       }
     }
-
-    // console.log(this.possiblePatterns);
   }
   /**
   displays the grid of cards
@@ -288,9 +321,8 @@ class FirstLvl extends State {
     pop();
   }
 
-  //inspired by github code
+  //inspired by github code :https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
   mousePressed() {
-    let numLoops = 0;
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       if (this.isUnderMouse(card, mouseX, mouseY)) {
@@ -314,14 +346,10 @@ class FirstLvl extends State {
             this.flippedCards.length >= 2 &&
             this.nbValues[0] !== this.nbValues[1]
           ) {
-
-            console.log(this.delayStartFC);
             const keys = Object.values(this.flippedCards);
             for (const key of keys) {
               console.log(key.isFaceUp);
               setTimeout(() => {
-
-                console.log("itworked");
                 this.resetChoiceFailed(key);
               }, this.delay);
 
@@ -338,15 +366,13 @@ class FirstLvl extends State {
     // console.log("failedmatch");
     if (obj.isFaceUp === true) {
       this.setIsFaceUp(obj, false);
-      console.log("intheloop");
     }
   }
 
-  //TAKEN FORMM GITHUB
+  //TAKEN FORMM GITHUB: https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
   setIsFaceUp(card, isFaceUp) {
     card.isFaceUp = isFaceUp;
   }
-  //END TAKEN
 
   isUnderMouse(card, x, y) {
     // return x >= this.x && x <= this.x + this.width  &&
