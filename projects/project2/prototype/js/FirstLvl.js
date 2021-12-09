@@ -11,9 +11,9 @@ class FirstLvl extends State {
     //starts off the game with the game FOR NOW
     // let state = `game`;
     //array that contains the first set of cards
-    this.itsTime=false;
+
     this.cards = [];
- this.delayStartFC = null
+
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
@@ -55,10 +55,7 @@ class FirstLvl extends State {
     super.draw();
     background(0);
     this.displayCardGrid();
-if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
-  this.itsTime=true;
-  this.delayStartFC = null;
-}
+
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       // card.display();
@@ -293,6 +290,8 @@ if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
 
   //inspired by github code
   mousePressed() {
+
+
     let numLoops=0;
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
@@ -308,6 +307,7 @@ if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
             this.flippedCards.length >= 2 &&
             this.nbValues[0] === this.nbValues[1]
           ) {
+
             console.log("its a match");
             this.flippedCards.splice(0, 2);
             this.nbValues.splice(0, 2);
@@ -326,11 +326,17 @@ if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
             //
             //   this.resetChoiceFailed(this.flippedCards[prop]);
             // }
+
+                  console.log(this.delayStartFC);
             const keys = Object.values(this.flippedCards)
               for (const key of keys) {
                 console.log(key.isFaceUp);
+                setTimeout(() => {  // <-- use arrow function here
+console.log("itworked");
+this.resetChoiceFailed(key);
+//Prints as true after 10 seconds
+}, 2000);
 
-                 this.resetChoiceFailed(key);
 
                 this.flippedCards.splice(key, 1);
                   this.nbValues.splice(key, 1);
@@ -338,7 +344,7 @@ if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
               }
 
           }
-this.delayStartFC = frameCount;
+
         }
       }
     }
@@ -348,10 +354,9 @@ this.delayStartFC = frameCount;
     // console.log("failedmatch");
     if(obj.isFaceUp===true){
       console.log("itsfacrup");
-      if (this.itsTime===true) {
+
     this.setIsFaceUp(obj, false);
     console.log("intheloop");
-   }
 
 
  }
