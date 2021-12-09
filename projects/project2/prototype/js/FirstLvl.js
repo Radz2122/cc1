@@ -11,8 +11,9 @@ class FirstLvl extends State {
     //starts off the game with the game FOR NOW
     // let state = `game`;
     //array that contains the first set of cards
+    this.itsTime=false;
     this.cards = [];
-
+ this.delayStartFC = null
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
@@ -54,7 +55,10 @@ class FirstLvl extends State {
     super.draw();
     background(0);
     this.displayCardGrid();
-
+if(this.delayStartFC && (frameCount - this.delayStartFC) > 30){
+  this.itsTime=true;
+  this.delayStartFC = null;
+}
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       // card.display();
@@ -325,12 +329,16 @@ class FirstLvl extends State {
             const keys = Object.values(this.flippedCards)
               for (const key of keys) {
                 console.log(key.isFaceUp);
-                 setTimeout(this.resetChoiceFailed(key),4000);
+
+                 this.resetChoiceFailed(key);
+
                 this.flippedCards.splice(key, 1);
                   this.nbValues.splice(key, 1);
-              }
-          }
 
+              }
+
+          }
+this.delayStartFC = frameCount;
         }
       }
     }
@@ -339,14 +347,22 @@ class FirstLvl extends State {
   resetChoiceFailed(obj) {
     console.log("failedmatch");
     if(obj.isFaceUp===true){
-        this.setIsFaceUp(obj, false);
-    }
+      console.log("itsfacrup");
+      if (this.itsTime===true) {
+    this.setIsFaceUp(obj, false);
+    console.log("intheloop");
+   }
 
-    // // this.flippedCards.splice(obj,1);
+
+ }
+
+    }
+// // this.flippedCards.splice(obj,1);
     // this.nbValues.splice(obj,1);
     // console.log(this.flippedCards);
     // console.log("failedmatch");
-  }
+
+
 
   //TAKEN FORMM GITHUB
   setIsFaceUp(card, isFaceUp) {
