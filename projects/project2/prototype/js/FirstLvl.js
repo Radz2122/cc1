@@ -108,6 +108,14 @@ class FirstLvl extends State {
 
   //displays the game assets
   game() {}
+
+  cardBack(card){
+    push();
+    fill(80, 50, 44);
+    rectMode(CENTER);
+    rect(card.x, card.y, card.width, card.height);
+    pop();
+  }
   //REMOVE ALL ELESE FORM PATTERNS AND PUT INTO ONE FUCNTION
   pattern1(card) {
     noStroke();
@@ -171,11 +179,7 @@ class FirstLvl extends State {
 
       pop();
     } else {
-      push();
-      fill(250, 34, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
+      this.cardBack(card);
     }
   }
   //inspired by  https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
@@ -212,11 +216,7 @@ class FirstLvl extends State {
       }
       pop();
     } else {
-      push();
-      fill(50, 34, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
+      this.cardBack(card);
     }
   }
 
@@ -267,12 +267,7 @@ class FirstLvl extends State {
 
       pop();
     } else {
-      push();
-      fill(34, 50, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-
-      pop();
+      this.cardBack(card);
     }
   }
   //just a random cute artwork of a dog:)
@@ -288,11 +283,7 @@ class FirstLvl extends State {
       image(img, card.x, card.y, card.width, card.height);
       pop();
     } else {
-      push();
-      fill(34, 50, 44);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
+      this.cardBack(card);
     }
   }
   pattern5(card) {
@@ -309,11 +300,7 @@ class FirstLvl extends State {
       pop();
       pop();
     } else {
-      push();
-      fill(80, 50, 44);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
+      this.cardBack(card);
     }
   }
   //i tested a few things to create this effect
@@ -343,11 +330,7 @@ class FirstLvl extends State {
       }
       pop();
     } else {
-      push();
-      fill(100, 50, 44);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      pop();
+      this.cardBack(card);
     }
   }
 
