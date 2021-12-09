@@ -13,11 +13,12 @@ class FirstLvl extends State {
     //array that contains the first set of cards
 
     this.cards = [];
-    this.delay = 3000;
+    this.delay = 2000;
     this.canTurnCard=true;
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
+
 
 
     this.patternChoice;
@@ -57,7 +58,7 @@ class FirstLvl extends State {
     super.draw();
     background(0);
     this.displayCardGrid();
-
+    this.checkEnding();
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
       // card.display();
@@ -410,6 +411,12 @@ class FirstLvl extends State {
       return true;
     } else {
       return false;
+    }
+  }
+
+  checkEnding(){
+    if(this.points>1){
+      currentState= new SecondLvl();
     }
   }
 }
