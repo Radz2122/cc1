@@ -18,6 +18,7 @@ class FirstLvl extends State {
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
+  
 
     this.patternChoice;
     this.possiblePatterns = [
@@ -229,7 +230,9 @@ class FirstLvl extends State {
       fill(34, 50, 44);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-      pop();
+  pop();
+      image(img, card.x, card.y, card.width, card.height);
+
     }
   }
   pattern5(card) {

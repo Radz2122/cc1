@@ -1,5 +1,11 @@
 // A variable to store the currently active state object (starts empty)
 let currentState;
+let img;
+
+  function preload(){
+    //image source= https://www.pinterest.ca/pin/553520610445431813/
+    img=loadImage('assets/images/dog.jpg');
+  }
 
 // setup()
 // Create the canvas, start our program in the title state, set default text style
