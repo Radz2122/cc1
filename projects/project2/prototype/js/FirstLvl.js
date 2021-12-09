@@ -345,7 +345,7 @@ this.delayStartFC = frameCount;
   }
 
   resetChoiceFailed(obj) {
-    console.log("failedmatch");
+    // console.log("failedmatch");
     if(obj.isFaceUp===true){
       console.log("itsfacrup");
       if (this.itsTime===true) {
