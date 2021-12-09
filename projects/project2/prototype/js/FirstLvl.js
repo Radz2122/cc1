@@ -14,6 +14,7 @@ class FirstLvl extends State {
 
     this.cards = [];
     this.delay = 3000;
+    this.canTurnCard=true;
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
@@ -327,7 +328,7 @@ class FirstLvl extends State {
       let card = this.cards[i];
       if (this.isUnderMouse(card, mouseX, mouseY)) {
         // console.log(card.isFaceUp);
-        if (this.flippedCards.length < 2 && !card.isFaceUp) {
+        if (this.flippedCards.length < 2 && !card.isFaceUp && this.canTurnCard) {
           this.setIsFaceUp(card, true);
           // console.log(card.isFaceUp);
           this.flippedCards.push(card);
@@ -338,6 +339,7 @@ class FirstLvl extends State {
             this.nbValues[0] === this.nbValues[1]
           ) {
             console.log("its a match");
+            this.canTurnCard=true;
             this.flippedCards.splice(0, 2);
             this.nbValues.splice(0, 2);
             this.points++;
@@ -346,6 +348,7 @@ class FirstLvl extends State {
             this.flippedCards.length >= 2 &&
             this.nbValues[0] !== this.nbValues[1]
           ) {
+            this.canTurnCard=false;
             const keys = Object.values(this.flippedCards);
             for (const key of keys) {
               console.log(key.isFaceUp);
@@ -358,14 +361,17 @@ class FirstLvl extends State {
             }
           }
         }
+
       }
     }
   }
 
   resetChoiceFailed(obj) {
+      this.canTurnCard=true;
     // console.log("failedmatch");
     if (obj.isFaceUp === true) {
       this.setIsFaceUp(obj, false);
+
     }
   }
 
