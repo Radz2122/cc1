@@ -18,7 +18,7 @@ class FirstLvl extends State {
     // How many rows and columns in the grid?
     this.rows = 3;
     this.cols = 4;
-  
+
 
     this.patternChoice;
     this.possiblePatterns = [
@@ -216,6 +216,7 @@ class FirstLvl extends State {
       pop();
     }
   }
+  //just a random cute artwork of a dog:)
   pattern4(card) {
     if (card.isFaceUp === true) {
       push();
@@ -230,12 +231,16 @@ class FirstLvl extends State {
       fill(34, 50, 44);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
-  pop();
+      pop();
+      push();
+      imageMode(CENTER);
       image(img, card.x, card.y, card.width, card.height);
-
+      pop();
     }
   }
   pattern5(card) {
+    //SOURCE: https://happycoding.io/examples/p5js/input/grouchy-face
+  //  USE THISS   // text("😠", width / 2 + random(-10, 10), height / 2 + random(-10, 10));
     if (card.isFaceUp === true) {
       push();
       fill(34, 56, 34);
