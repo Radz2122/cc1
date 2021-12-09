@@ -16,9 +16,11 @@ class Title extends State {
     // even if it doesn't do anything right now. It might
     // later!
     super();
+    createCanvas(windowWidth,windowHeight);
 
     // Set our property determining the title of the simulation
-    this.titleString = "Beginning";
+    this.titleString = "Welcome to the card matchmaking game! Click on the cards to find their respective pair:)";
+    this.subTitleString="Click anywhere to start!";
   }
 
   // draw()
@@ -36,23 +38,34 @@ class Title extends State {
 
     // Overkill perhaps, but we have a separate method to just display
     // the actual title text. More methods/functions is generally better.
-    this.displayTitle();
+    this.displayTitles();
   }
 
   // displayTitle()
   // Sets style and then display the title in the titleString property on the canvas
-  displayTitle() {
+  displayTitles() {
     push();
     fill(255);
+    // Text settings
+    textSize(35);
+    textAlign(CENTER, CENTER);
     text(this.titleString, width / 2, height / 2);
     pop();
+    push();
+    fill(255);
+    // Text settings
+    textSize(25);
+    textAlign(CENTER, CENTER);
+    text(this.subTitleString, width / 2, (height /2)+200);
+    pop();
+
   }
 
   // keyPressed()
   // Called by the main script when a key is pressed! Switches to the Animation state
-  keyPressed() {
+  mousePressed() {
     // Always call the superclass version of the method in case it does something or will
-    super.keyPressed();
+    super.mousePressed();
 
     // Switch to the animation state
 

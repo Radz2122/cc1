@@ -23,9 +23,6 @@ function setup() {
   // like the `setup()` for that state.
   currentState = new Title();
 
-  // Text settings
-  textSize(32);
-  textAlign(CENTER, CENTER);
 
   //sound
   userStartAudio();
@@ -49,12 +46,7 @@ function draw() {
 // will work because they all extend the State class which does have one. For instance
 // neither Animation nor Ending define a keyPressed() method, but this still works
 // because they INHERIT the one from the State class.
-function keyPressed() {
-  // If the current state is Title this will call the Title class keyPressed()
-  // If the current state is Animation this will call the State class keyPressed()
-  // if the current state is Ending this will call the State class keyPressed()
-  currentState.keyPressed();
-}
+
 function mousePressed(){
   currentState.mousePressed();
 }

@@ -109,6 +109,7 @@ class FirstLvl extends State {
   //displays the game assets
   game() {}
 
+//the back of the card thats called if it isnt clicked on
   cardBack(card){
     push();
     fill(80, 50, 44);
@@ -296,6 +297,7 @@ class FirstLvl extends State {
       rect(card.x, card.y, card.width, card.height);
       push();
       textSize(60);
+      textAlign(CENTER, CENTER);
       text("😠", card.x + random(-1, 1), card.y + random(-1, 1));
       pop();
       pop();
