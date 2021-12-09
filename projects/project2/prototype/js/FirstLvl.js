@@ -102,6 +102,8 @@ class FirstLvl extends State {
 
   //displays the game assets
   game() {}
+  //DO SMT GSOUND RELATEDDDDDDDDD
+  //REMOVE ALL ELESE FORM PATTERNS AND PUT INTO ONE FUCNTION
   pattern1(card) {
     if (card.isFaceUp === true) {
       push();
@@ -260,6 +262,7 @@ class FirstLvl extends State {
     }
   }
   pattern6(card) {
+    let blendModes=[];
     if (card.isFaceUp === true) {
       push();
       fill(34, 56, 34);
@@ -273,6 +276,16 @@ class FirstLvl extends State {
       fill(100, 50, 44);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
+      pop();
+      push();
+      //tried seeing if i could change blendmodes randomly from array
+      blendModes=[DIFFERENCE,MULTIPLY,BLEND];
+      let randomBlendMode = blendModes[Math.floor(Math.random() * blendModes.length)];
+      blendMode(randomBlendMode);
+      fill(0, 56, 34);
+      rect(card.x, card.y, card.width / 2, card.height / 2);
+      fill(0, 34, 34);
+      rect(card.x-10, card.y-10, card.width / 2, card.height / 2);
       pop();
     }
   }
