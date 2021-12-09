@@ -462,8 +462,8 @@ class FirstLvl extends State {
   }
 
   checkEnding() {
-    if (this.points > 3) {
-      currentState = new SecondLvl();
+    if (this.points >0) {
+      currentState = new TransitionTitle();
     }
   }
 }
