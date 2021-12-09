@@ -278,7 +278,7 @@ class FirstLvl extends State {
       rect(card.x, card.y, card.width, card.height);
       pop();
       push();
-      //tried seeing if i could change blendmodes randomly from array
+      //tried seeing if i could change blendmodes randomly from array MIGHT CHASNGE
       blendModes=[DIFFERENCE,MULTIPLY,BLEND];
       let randomBlendMode = blendModes[Math.floor(Math.random() * blendModes.length)];
       blendMode(randomBlendMode);
