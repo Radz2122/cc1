@@ -58,7 +58,7 @@ class FirstLvl extends State {
     super.draw();
     background(0);
 
-          // background
+          // background inspired by: https://pippinbarr.github.io/cc/1/topics/sound/reintroducing-p5-sound.html#getpeaks
           push();
          stroke(20, 20, 60, 100);
          // Run through every peak in the array
@@ -115,7 +115,6 @@ class FirstLvl extends State {
 
   //displays the game assets
   game() {}
-  //DO SMT GSOUND RELATEDDDDDDDDD
   //REMOVE ALL ELESE FORM PATTERNS AND PUT INTO ONE FUCNTION
   pattern1(card) {
     // if (card.isFaceUp === true) {
@@ -132,6 +131,58 @@ class FirstLvl extends State {
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       pop();
+      push();
+      blendMode(BLEND);
+      // Set foreground as white
+      fill(255);
+
+      // Set x-or / difference blend mode
+      blendMode(DIFFERENCE);
+
+      noStroke();
+      // Center of card
+      const x = card.x;
+      const y = card.y;
+
+      // Fraction of screen dim
+      const dim = min(card.width/2, card.height/2);
+      const size = dim * 0.5;
+
+push();
+blendMode(DIFFERENCE);
+      rectMode(CENTER);
+      translate(x,y);
+    rotate(frameCount * 0.020);
+
+      rect(card.width/6, card.height /6, size/2, size/2);
+pop();
+push();
+blendMode(DIFFERENCE);
+      rectMode(CENTER);
+      translate(x,y);
+    rotate(-frameCount * 0.020);
+    // ellipse(,, size / 2, size / 2);
+      rect(card.width/6, card.height /6, size/2, size/2);
+pop();
+push();
+blendMode(DIFFERENCE);
+      rectMode(CENTER);
+      translate(x,y);
+    rotate(-frameCount * 0.015);
+    // ellipse(,, size / 2, size / 2);
+      rect(card.width/6, card.height /6, size, size);
+pop();
+push();
+blendMode(DIFFERENCE);
+      rectMode(CENTER);
+      translate(x,y);
+    rotate(frameCount * 0.015);
+    // ellipse(,, size / 2, size / 2);
+      rect(card.width/6, card.height /6, size, size);
+pop();
+
+
+        pop();
 
 
     // }
@@ -207,7 +258,7 @@ class FirstLvl extends State {
 
       // Create a circle slightly offset down and right
       push();
-      translate(card.x, card.y);
+      translate(x,y);
       rotate(frameCount * 0.025);
       ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
       pop();
