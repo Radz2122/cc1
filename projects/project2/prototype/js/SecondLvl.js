@@ -22,9 +22,15 @@ class SecondLvl extends FirstLvl {
     // just in case it does something important.
     super.draw();
 
-    // this.checkEnding();
   }
-
+  //change the color of the back of the card for the second level
+  cardBack(card){
+    push();
+    fill(70, 70, 54);
+    rectMode(CENTER);
+    rect(card.x, card.y, card.width, card.height);
+    pop();
+  }
 
   // display()
   // Displays the circle as an ellipse on the canvas
