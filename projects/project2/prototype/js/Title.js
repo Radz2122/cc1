@@ -13,7 +13,7 @@ class Title extends State {
     createCanvas(windowWidth,windowHeight);
 
     // Set our property determining the title of the simulation
-    this.titleString = "Welcome to the card matchmaking game! Click on the cards to find their respective pair:)";
+    this.titleString = "Welcome to the card matchmaking game! Click on the cards to make pairs :)";
     this.subTitleString="Click anywhere to start!";
   }
 
@@ -33,14 +33,14 @@ class Title extends State {
   // Sets style and then display the title in the titleString and subTitleString properties on the canvas
   displayTitles() {
     push();
-    fill(255);
+    fill(1,156,161);
     // Text settings
     textSize(35);
     textAlign(CENTER, CENTER);
     text(this.titleString, width / 2, height / 2);
     pop();
     push();
-    fill(255);
+    fill(1,156,161);
     // Text settings
     textSize(25);
     textAlign(CENTER, CENTER);

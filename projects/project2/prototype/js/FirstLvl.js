@@ -46,6 +46,8 @@ class FirstLvl extends State {
     this.patternName = [];
     //points gotten by the player
     this.points = 0;
+    //text on top of card grid
+    this.text = "Make pairs by clicking on the cards!";
     //create the canvas
     createCanvas(windowWidth, windowHeight);
     //creates the grid of cards
@@ -77,7 +79,14 @@ class FirstLvl extends State {
       line(i, height / 2, i, y);
     }
     pop();
-
+    //display text
+    push();
+    fill(1,156,161);
+    // Text settings
+    textSize(35);
+    textAlign(CENTER, CENTER);
+    text(this.text, width / 2, height /12);
+    pop();
     //display the grid of cards
     this.displayCardGrid();
     //verify the amount of points gotten by the player

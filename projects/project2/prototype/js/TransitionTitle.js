@@ -38,7 +38,7 @@ class TransitionTitle extends State {
   // Sets style and then display the text in the transitionTitleString property on the canvas
   displayTitles() {
     push();
-    fill(255);
+    fill(1,156,161);
     // Text settings
     textSize(35);
     textAlign(CENTER, CENTER);
