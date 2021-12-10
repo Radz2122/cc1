@@ -2,15 +2,16 @@
 Project 2
 Radhika Patel
 
-A state representing the transition screen of the program
+A state representing the second transition screen of the program
 Displays the text on the screen and switches the next level on mouseClick
  **/
-class TransitionTitle extends State {
+class SecondTransitionTitle extends State {
+
   constructor() {
     super();
 
     // Set our property determining the text of the state
-    this.transitionTitleString = "You completed the level! Goodjob, on to the next one...";
+    this.transitionTitleString = "Another one!! One more to go...";
   }
 
 // displays the text
@@ -22,6 +23,7 @@ class TransitionTitle extends State {
     this.displayTitles();
   }
 
+  // displayTitle()
   // Sets style and then display the text in the transitionTitleString property on the canvas
   displayTitles() {
     push();
@@ -37,6 +39,6 @@ class TransitionTitle extends State {
 // Switches to the next level state
   mousePressed() {
     super.mousePressed();
-    currentState = new SecondLvl();
+    currentState = new ThirdLvl();
   }
 }

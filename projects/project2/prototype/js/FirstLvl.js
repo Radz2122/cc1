@@ -501,6 +501,7 @@ class FirstLvl extends State {
             this.patternName.splice(0, 2);
             //the player gets a point
             this.points++;
+            console.log(this.points);
           }
           //verifies if the cards clicked match
           else if (
@@ -560,8 +561,7 @@ class FirstLvl extends State {
   Verifies the amount of points earned by the player to switch stages
 **/
   checkEnding() {
-    //CHANGE!!!!!!!!
-    if (this.points >0) {
+    if (this.points >=6) {
       currentState = new TransitionTitle();
     }
   }

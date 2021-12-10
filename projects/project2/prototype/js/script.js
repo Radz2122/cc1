@@ -34,10 +34,10 @@ function setup() {
   //sound
   userStartAudio();
   peaks = backMusic.getPeaks(windowWidth);
-  //PLAY MUSIC!!!!!!!!!!!!!!
- // backMusic.play();
-// backMusic.loop();
-// backMusic.setVolume(0.4);
+  //play the music, loop it and change the volume
+  backMusic.play();
+  backMusic.loop();
+  backMusic.setVolume(0.4);
 }
 
 //calls the draw method of the current state
