@@ -124,159 +124,184 @@ class FirstLvl extends State {
     pop();
   }
 
+  /**
+    creates the first pattern/design that will end up on 2 random cards
+
+    -This pattern creates a bunch of squares that rotate and create an effect
+    thanks to the blendmode
+  **/
   pattern1(card) {
     noStroke();
     if (card.isFaceUp === true) {
+      //create the base rectangle of the card
       push();
-      fill(34, 56, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      blendMode(DIFFERENCE);
-      fill(0, 56, 34);
-      rect(card.x, card.y, card.width / 2, card.height / 2);
-      pop();
-      push();
-      blendMode(BLEND);
-      // Set foreground as white
-      fill(255);
+        fill(34, 56, 34);
+        rectMode(CENTER);
+        rect(card.x, card.y, card.width, card.height);
+        //create a second rectangle in the center of the card
+        blendMode(DIFFERENCE);
+        fill(0, 56, 34);
+        rect(card.x, card.y, card.width / 2, card.height / 2);
+        pop();
 
-      // Set x-or / difference blend mode
-      blendMode(DIFFERENCE);
+        push();
+        // Set foreground as white
+        fill(255);
 
-      // Center of card
-      const x = card.x;
-      const y = card.y;
+        // Set difference blend mode
+        blendMode(DIFFERENCE);
 
-      // Fraction of screen dim
-      const dim = min(card.width / 2, card.height / 2);
-      const size = dim * 0.5;
+        // get center of card
+        const x = card.x;
+        const y = card.y;
 
-      push();
-      blendMode(DIFFERENCE);
-      rectMode(CENTER);
-      translate(x, y);
-      rotate(frameCount * 0.02);
+        // Fraction of screen dim
+        const dim = min(card.width / 2, card.height / 2);
+        const size = dim * 0.5;
 
-      rect(card.width / 6, card.height / 6, size / 2, size / 2);
-      pop();
-      push();
-      blendMode(DIFFERENCE);
-      rectMode(CENTER);
-      translate(x, y);
-      rotate(-frameCount * 0.02);
-      // ellipse(,, size / 2, size / 2);
-      rect(card.width / 6, card.height / 6, size / 2, size / 2);
-      pop();
-      push();
-      blendMode(DIFFERENCE);
-      rectMode(CENTER);
-      translate(x, y);
-      rotate(-frameCount * 0.015);
-      // ellipse(,, size / 2, size / 2);
-      rect(card.width / 6, card.height / 6, size, size);
-      pop();
-      push();
-      blendMode(DIFFERENCE);
-      rectMode(CENTER);
-      translate(x, y);
-      rotate(frameCount * 0.015);
-      // ellipse(,, size / 2, size / 2);
-      rect(card.width / 6, card.height / 6, size, size);
-      pop();
+        //create first rotating square
+        push();
+        blendMode(DIFFERENCE);
+        rectMode(CENTER);
+        translate(x, y);
+        rotate(frameCount * 0.02);
+        rect(card.width / 6, card.height / 6, size / 2, size / 2);
+        pop();
+        //create second rotating square
+        push();
+        blendMode(DIFFERENCE);
+        rectMode(CENTER);
+        translate(x, y);
+        rotate(-frameCount * 0.02);
+        rect(card.width / 6, card.height / 6, size / 2, size / 2);
+        pop();
+        //create third rotating square
+        push();
+        blendMode(DIFFERENCE);
+        rectMode(CENTER);
+        translate(x, y);
+        rotate(-frameCount * 0.015);
+        rect(card.width / 6, card.height / 6, size, size);
+        pop();
 
+        //create fourth rotating square
+        push();
+        blendMode(DIFFERENCE);
+        rectMode(CENTER);
+        translate(x, y);
+        rotate(frameCount * 0.015);
+        rect(card.width / 6, card.height / 6, size, size);
+        pop();
       pop();
     } else {
+      //if the card isnt flipped set it back to its default state (a solid color)
       this.cardBack(card);
     }
   }
-  //inspired by  https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
+
+  /**
+    creates the second pattern/design that will end up on 2 random cards
+    -This design is inspired by: https://editor.p5js.org/pippinbarr/sketches/B09AFYsGQ
+    It creates a firework-like shape with like rotating around the same axis
+  **/
   pattern2(card) {
     //CHANGE!!
     // if (card.isFaceUp === true) {
       push();
+      //create the base rectangle of the card
       fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
 
-      // How many lines projecting from the center in a circle?
+      //lines projecting from the center in a circle?
       let lines = 50;
 
-      // Translate to the centre for rotation purposes
+      // Translate to the centre of the card for rotation purposes
       translate(card.x, card.y);
-      // A light stroke
+      // set the stroke
       stroke(200);
       // Loop through all the lines we need to draw
       for (let i = 0; i < lines; i++) {
         // Rotate by one increment based on the number of lines there are
         rotate(TWO_PI / lines);
-        // Calculate the time parameter for this line based on the base
-        // plus a number based on the line number in the loop
 
-        // Calculate the length of the line based on the time parameter
-        // so it waves
+        // Calculate the length of the line randomly
         let length = random(2, card.width / 2);
         // A slightly light stroke weight
         strokeWeight(0.75);
-        // Draw the line!
+        // Draw the line
         line(0, 0, length, 3);
-        // Draw a point at the end of the line for a little visual flourish
-        // point(length + 5, 0);
       }
       pop();
+      //is called whern the card goes back to its default state
     // } else {
       // this.cardBack(card);
     // }
   }
 
-  //inspired by https://glitch.com/edit/#!/p5-example-xor?path=sketch.js%3A17%3A0
+  /**
+    creates the third pattern/design that will end up on 2 random cards
+    -This design is inspired by:https://glitch.com/edit/#!/p5-example-xor?path=sketch.js%3A17%3A0
+    It creates 3 shapes overlapping with a unique blend mode to give it a visual effect
+    The ellipse os also animated.
+  **/
+
   pattern3(card) {
     if (card.isFaceUp === true) {
       push();
-      fill(34, 56, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      // Set foreground as white
-      fill(255);
+        //create base rectangle for the card
+        fill(34, 56, 34);
+        rectMode(CENTER);
+        rect(card.x, card.y, card.width, card.height);
 
-      // Set x-or / difference blend mode
-      blendMode(DIFFERENCE);
+        // Set difference blend mode
+        blendMode(DIFFERENCE);
+        //remove stroke
+        noStroke();
 
-      noStroke();
-      // Center of card
-      const x = card.x;
-      const y = card.y;
+        // Center of card
+        const x = card.x;
+        const y = card.y;
 
-      // Fraction of screen dim
-      const dim = min(card.width, card.height);
-      const size = dim * 0.5;
+        // Fraction of screen dim
+        const dim = min(card.width, card.height);
+        const size = dim * 0.5;
 
-      rectMode(CENTER);
-      rect(x, y, size, size);
+        //creates rectangle on card
+        rectMode(CENTER);
+        rect(x, y, size, size);
 
-      // Create a circle slightly offset down and right
-      push();
-      translate(x, y);
-      rotate(frameCount * 0.025);
-      ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
-      pop();
+        // Creates a circle that rotates aorund the shapes
+        push();
+        translate(x, y);
+        rotate(frameCount * 0.025);
+        ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
+        pop();
 
-      // Create a triangle slightly offset up and left
-      translate(-size / 4, -size / 4);
-      triangle(
-        x,
-        y - size / 2,
-        x + size / 2,
-        y + size / 2,
-        x - size / 2,
-        y + size / 2
-      );
+        // Creates a triangle
+        translate(-size / 4, -size / 4);
+        triangle(
+          x,
+          y - size / 2,
+          x + size / 2,
+          y + size / 2,
+          x - size / 2,
+          y + size / 2
+        );
 
       pop();
     } else {
+      //is called whern the card goes back to its default state
       this.cardBack(card);
     }
   }
-  //just a random cute artwork of a dog:)
+
+  /**
+    creates the fourth pattern/design that will end up on 2 random cards
+    - In this design, I wanted to use an image
+      image source= https://www.pinterest.ca/pin/553520610445431813/
+  **/
+
   pattern4(card) {
     if (card.isFaceUp === true) {
       push();
@@ -289,63 +314,89 @@ class FirstLvl extends State {
       image(img, card.x, card.y, card.width, card.height);
       pop();
     } else {
+      //is called whern the card goes back to its default state
       this.cardBack(card);
     }
   }
-  pattern5(card) {
-    //SOURCE: https://happycoding.io/examples/p5js/input/grouchy-face
 
+  /**
+    creates the fifth pattern/design that will end up on 2 random cards
+    -In this design, i wanted to use text
+    Code inspired by: https://happycoding.io/examples/p5js/input/grouchy-face
+  **/
+  pattern5(card) {
     if (card.isFaceUp === true) {
       push();
-      fill(34, 56, 34);
-      rectMode(CENTER);
-      rect(card.x, card.y, card.width, card.height);
-      push();
-      textSize(60);
-      textAlign(CENTER, CENTER);
-      text("😠", card.x + random(-1, 1), card.y + random(-1, 1));
-      pop();
+        //create the base rectangle for the card
+        fill(34, 56, 34);
+        rectMode(CENTER);
+        rect(card.x, card.y, card.width, card.height);
+        //create the text
+        push();
+        textSize(60);
+        textAlign(CENTER, CENTER);
+        //apply random translation to card to make it shake
+        text("😠", card.x + random(-1, 1), card.y + random(-1, 1));
+        pop();
       pop();
     } else {
+      //is called whern the card goes back to its default state
       this.cardBack(card);
     }
   }
-  //i tested a few things to create this effect
+
+  /**
+    creates the sixth pattern/design that will end up on 2 random cards
+    -In this design i wanted to explore the possibilities with the different blendmodes
+    It creates a spinning flower that changes colors
+  **/
   pattern6(card) {
+    //contains the different blendmodes
     let blendModes = [];
     if (card.isFaceUp === true) {
       push();
+      //create the base rectangle for the card
       fill(34, 56, 34);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
+      //create a second rectangle in the card
       fill(0, 56, 34);
       rect(card.x, card.y, card.width / 2, card.height / 2);
       pop();
+
+      // create a flower in the middle of the card
       push();
-      translate(card.x, card.y);
-      noStroke();
-      blendModes = [DIFFERENCE, MULTIPLY, BLEND];
-      let randomBlendMode =
-        blendModes[Math.floor(Math.random() * blendModes.length)];
-      blendMode(randomBlendMode);
-      for (let i = 0; i < 10; i++) {
-        // translate(x, y);
-        rotate(frameCount * 0.015);
-        fill(250, 34, 34);
-        ellipse(card.width / 8, card.height / 8, 10, 50);
-        rotate(PI / 8);
-      }
+        translate(card.x, card.y);
+        noStroke();
+        //insert possible blendmodes in an array
+        blendModes = [DIFFERENCE, MULTIPLY, BLEND];
+        //select a random blendmode
+        let randomBlendMode =
+          blendModes[Math.floor(Math.random() * blendModes.length)];
+          //apply random blendmode
+        blendMode(randomBlendMode);
+        //create flower petals
+        for (let i = 0; i < 10; i++) {
+          rotate(frameCount * 0.015);
+          fill(250, 34, 34);
+          ellipse(card.width / 8, card.height / 8, 10, 50);
+          //rotate petals
+          rotate(PI / 8);
+        }
       pop();
     } else {
+      //is called whern the card goes back to its default state
       this.cardBack(card);
     }
   }
-
+/**
+  object containing the cards propreties, returns a card
+**/
   createCard(x, y, patternNum) {
     let card = {
       x: x,
       y: y,
-      patternNum: patternNum,
+      patternNum: patternNum,// the name/number of a pattern/design
       width: 150,
       height: 200,
       isFaceUp: false,
@@ -353,8 +404,10 @@ class FirstLvl extends State {
     return card;
   }
 
-  //displays the cards in a grid
-  // code inspired by Pippin's grid: https://editor.p5js.org/pippinbarr/sketches/Xq3qsbQWA
+  /**
+    displays the cards in a grid
+   code inspired by Pippin's grid: https://editor.p5js.org/pippinbarr/sketches/Xq3qsbQWA
+  **/
   createCardGrid() {
     for (let c = 0; c < this.cols; c++) {
       for (let r = 0; r < this.rows; r++) {
@@ -365,13 +418,15 @@ class FirstLvl extends State {
         //creating cards and pushing them into their array
         // the multiplied value is the distance between the cards
         //the addded value is the position of the entire card grid
-        //had to play around with the numbers to find the correct ones....
         let card = this.createCard(
           c * 280 + windowWidth / 3.5,
           r * 280 + windowHeight / 4,
+          //assign a pattern/design to a card
           this.possiblePatterns[patternChoice]
         );
+        //insert card into the cards array
         this.cards.push(card);
+        //remove the patterns form the choices avaible in its array
         this.possiblePatterns.splice(patternChoice, 1);
       }
     }
@@ -396,44 +451,66 @@ class FirstLvl extends State {
     pop();
   }
 
-  //inspired by github code :https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
+  /**
+    inspired by github code :https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
+    This was inpired by the github code I found, the logic that is... because I changed most of it to fit my code:)
+    Quick rundown of what it does:
+    -Loops through every card in the cards array
+    -Verifies if any card is under the mouse, if it was clicked
+    -If a card was clicked, its added to the flippedCards array, it is set face up, and the pattern/design name is registered in a seperate array
+    -Once thats all done, it chekcs if the pattern names MATCH. If they do, the player can turn their next card,
+    the card and the pattern names are removed form their respective arrays and the player gains a point
+    -If it DOES NOT MATCH, the player cannot turn another card until the selected cards are flipped back to their default look,
+    and once again the card and the pattern names are removed from their respective arrays.
+  **/
   mousePressed() {
+    //loop through the cards
     for (let i = 0; i < this.cards.length; i++) {
       let card = this.cards[i];
+      //chekc if player clicked on a card
       if (this.isUnderMouse(card, mouseX, mouseY)) {
-        // console.log(card.isFaceUp);
+        //verifies if the card clicked can be turned
         if (
           this.flippedCards.length < 2 &&
           !card.isFaceUp &&
           this.canTurnCard
         ) {
+          //flip the card
           this.setIsFaceUp(card, true);
-          // console.log(card.isFaceUp);
+          //add it to the array of flipped cards
           this.flippedCards.push(card);
+          //add its pattern to a seperate array
           this.patternName.push(card.patternNum);
-
+          //verifies if the cards clicked match
           if (
             this.flippedCards.length >= 2 &&
             this.patternName[0] === this.patternName[1]
           ) {
-            console.log("its a match");
+            //if they match:
+            //the player can turn their next cards
             this.canTurnCard = true;
+            //the cards and the pattern name are removed from their arrays
             this.flippedCards.splice(0, 2);
             this.patternName.splice(0, 2);
+            //the player gets a point
             this.points++;
-            // console.log(this.points);
-          } else if (
+          }
+          //verifies if the cards clicked match
+          else if (
             this.flippedCards.length >= 2 &&
             this.patternName[0] !== this.patternName[1]
           ) {
+            //if they DON'T match:
+            //the player cannot turn another card until the current ones are flipped back
             this.canTurnCard = false;
+            //loop through the objects in flippedCards array
             const keys = Object.values(this.flippedCards);
             for (const key of keys) {
-              console.log(key.isFaceUp);
+              //call the rest funciton after a delay so the player has the time to look at the card design
               setTimeout(() => {
                 this.resetChoiceFailed(key);
               }, this.delay);
-
+              //the cards and the pattern name are removed from their arrays
               this.flippedCards.splice(key, 1);
               this.patternName.splice(key, 1);
             }
@@ -443,29 +520,38 @@ class FirstLvl extends State {
     }
   }
 
+/**
+  calls the function to flip the card bakc to its default state in its Object
+  also allows the player to turn another card
+**/
   resetChoiceFailed(obj) {
     this.canTurnCard = true;
-    // console.log("failedmatch");
     if (obj.isFaceUp === true) {
       this.setIsFaceUp(obj, false);
     }
   }
 
-  //TAKEN FORMM GITHUB: https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
+  /**
+    inspired by the github code used for the mouseClick: https://github.com/miriamtocino/p5-js-memory-game/blob/master/game.js
+    flips the card depending on the argument passed
+  **/
   setIsFaceUp(card, isFaceUp) {
     card.isFaceUp = isFaceUp;
   }
 
+/**
+  Verifies if a card is under the mouse, so if the player clicked on it
+**/
   isUnderMouse(card, x, y) {
-    // return x >= this.x && x <= this.x + this.width  &&
-    // y >= this.y && y <= this.y + this.height
     if (dist(card.x, card.y, x, y) < card.width / 2) {
       return true;
     } else {
       return false;
     }
   }
-
+/**
+  Verifies the amount of points earned by the player to switch stages
+**/
   checkEnding() {
     //CHANGE!!!!!!!!
     if (this.points >0) {
