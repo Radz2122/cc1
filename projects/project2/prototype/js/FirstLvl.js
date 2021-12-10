@@ -59,11 +59,12 @@ class FirstLvl extends State {
     //call the super class
     super.draw();
     //background color
-    background(0);
+    background(126,195,175);
     // background deisgn inspired by: https://pippinbarr.github.io/cc/1/topics/sound/reintroducing-p5-sound.html#getpeaks
     //was done with the sound file
     push();
-    stroke(20, 20, 60, 100);
+    strokeWeight(45);
+    stroke(240,131,134,100);
     // Run through every peak in the array
     for (let i = 0; i < peaks.length; i++) {
       // Get the current peak data
@@ -118,7 +119,7 @@ class FirstLvl extends State {
 //function of the back of the card thats called if it isnt clicked on
   cardBack(card){
     push();
-    fill(80, 50, 44);
+    fill(0,158,159);
     rectMode(CENTER);
     rect(card.x, card.y, card.width, card.height);
     pop();
@@ -135,19 +136,16 @@ class FirstLvl extends State {
     if (card.isFaceUp === true) {
       //create the base rectangle of the card
       push();
-        fill(34, 56, 34);
+        fill(132,205,202);
         rectMode(CENTER);
         rect(card.x, card.y, card.width, card.height);
         //create a second rectangle in the center of the card
         blendMode(DIFFERENCE);
-        fill(0, 56, 34);
+        fill(242,130,133);
         rect(card.x, card.y, card.width / 2, card.height / 2);
         pop();
 
         push();
-        // Set foreground as white
-        fill(255);
-
         // Set difference blend mode
         blendMode(DIFFERENCE);
 
@@ -195,7 +193,7 @@ class FirstLvl extends State {
       pop();
     } else {
       //if the card isnt flipped set it back to its default state (a solid color)
-      this.cardBack(card);
+        this.cardBack(card);
     }
   }
 
@@ -205,11 +203,10 @@ class FirstLvl extends State {
     It creates a firework-like shape with like rotating around the same axis
   **/
   pattern2(card) {
-    //CHANGE!!
-    // if (card.isFaceUp === true) {
+    if (card.isFaceUp === true) {
       push();
       //create the base rectangle of the card
-      fill(34, 56, 34);
+      fill(132,205,202);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
 
@@ -218,8 +215,6 @@ class FirstLvl extends State {
 
       // Translate to the centre of the card for rotation purposes
       translate(card.x, card.y);
-      // set the stroke
-      stroke(200);
       // Loop through all the lines we need to draw
       for (let i = 0; i < lines; i++) {
         // Rotate by one increment based on the number of lines there are
@@ -227,16 +222,17 @@ class FirstLvl extends State {
 
         // Calculate the length of the line randomly
         let length = random(2, card.width / 2);
-        // A slightly light stroke weight
-        strokeWeight(0.75);
+        //stroke weight
+        strokeWeight(1.5);
         // Draw the line
+        stroke(242,130,133);
         line(0, 0, length, 3);
       }
       pop();
       //is called whern the card goes back to its default state
-    // } else {
-      // this.cardBack(card);
-    // }
+    } else {
+      this.cardBack(card);
+    }
   }
 
   /**
@@ -250,7 +246,7 @@ class FirstLvl extends State {
     if (card.isFaceUp === true) {
       push();
         //create base rectangle for the card
-        fill(34, 56, 34);
+        fill(132,205,202);
         rectMode(CENTER);
         rect(card.x, card.y, card.width, card.height);
 
@@ -268,6 +264,7 @@ class FirstLvl extends State {
         const size = dim * 0.5;
 
         //creates rectangle on card
+        fill(0,156,159);
         rectMode(CENTER);
         rect(x, y, size, size);
 
@@ -275,6 +272,7 @@ class FirstLvl extends State {
         push();
         translate(x, y);
         rotate(frameCount * 0.025);
+        fill(132,205,202);
         ellipse(card.width / 5, card.height / 5, size / 2, size / 2);
         pop();
 
@@ -328,7 +326,7 @@ class FirstLvl extends State {
     if (card.isFaceUp === true) {
       push();
         //create the base rectangle for the card
-        fill(34, 56, 34);
+        fill(132,205,202);
         rectMode(CENTER);
         rect(card.x, card.y, card.width, card.height);
         //create the text
@@ -356,11 +354,11 @@ class FirstLvl extends State {
     if (card.isFaceUp === true) {
       push();
       //create the base rectangle for the card
-      fill(34, 56, 34);
+      fill(132,205,202);
       rectMode(CENTER);
       rect(card.x, card.y, card.width, card.height);
       //create a second rectangle in the card
-      fill(0, 56, 34);
+      fill(242,130,133);
       rect(card.x, card.y, card.width / 2, card.height / 2);
       pop();
 
@@ -378,7 +376,7 @@ class FirstLvl extends State {
         //create flower petals
         for (let i = 0; i < 10; i++) {
           rotate(frameCount * 0.015);
-          fill(250, 34, 34);
+          fill(1,156,161);
           ellipse(card.width / 8, card.height / 8, 10, 50);
           //rotate petals
           rotate(PI / 8);

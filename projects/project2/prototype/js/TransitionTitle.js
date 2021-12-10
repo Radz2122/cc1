@@ -27,7 +27,7 @@ class TransitionTitle extends State {
     // Set the background. We could do this in State if we knew that
     // we wanted all states to have a black background, but it probably
     // makes more sense to have this set per state like this.
-    background(0);
+    background(126,195,175);
 
     // Overkill perhaps, but we have a separate method to just display
     // the actual title text. More methods/functions is generally better.

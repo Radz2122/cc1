@@ -23,7 +23,7 @@ class Title extends State {
     super.draw();
 
     // Set the background.
-    background(0);
+    background(126,195,175);
 
     // display the  title text.
     this.displayTitles();

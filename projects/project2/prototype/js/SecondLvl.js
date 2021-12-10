@@ -27,12 +27,14 @@ class SecondLvl extends FirstLvl {
     // Always call the super() version of the method if there is one
     // just in case it does something important.
     super.draw();
-
+    push();
+    stroke(0,158,159);
+    pop();
   }
   //change the color of the back of the card for the second level
   cardBack(card){
     push();
-    fill(70, 70, 54);
+    fill(0,158,159);
     rectMode(CENTER);
     rect(card.x, card.y, card.width, card.height);
     pop();
