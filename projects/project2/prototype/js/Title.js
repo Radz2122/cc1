@@ -1,16 +1,12 @@
-// Title
-// A state representing the Title of our program
-// Displays the title on the screen and switches to
-// Animation on a key press.
+/**
+Project 2
+Radhika Patel
 
-// NOTE: We extend the State class to guarantee this class will have
-// the key methods that we call in the main program,
-// draw() and keyPressed() in this case.
+A state representing the Title of the program
+Displays the title on the screen and switches the first level on mouseClick
+ **/
+
 class Title extends State {
-
-  // constructor()
-  // Acts as the setup() of the state, called when the
-  // state is created. Sets the title of the program.
   constructor() {
     // call the superclass constructor
     super();
@@ -21,8 +17,7 @@ class Title extends State {
     this.subTitleString="Click anywhere to start!";
   }
 
-  // Called every frame in the main script. Handles what the title
-  // state needs to do each frame, which is display the title.
+  // displays the titles
   draw() {
     //  call the super() version of the method
     super.draw();
@@ -34,8 +29,8 @@ class Title extends State {
     this.displayTitles();
   }
 
-  // displayTitle()
-  // Sets style and then display the title in the titleString property on the canvas
+
+  // Sets style and then display the title in the titleString and subTitleString properties on the canvas
   displayTitles() {
     push();
     fill(255);
@@ -54,12 +49,10 @@ class Title extends State {
 
   }
 
-  // keyPressed()
-  // Called by the main script when a key is pressed! Switches to the Animation state
+
+  //Switches to the FirstLvl state
   mousePressed() {
-    // Always call the superclass version of the method in case it does something or will
     super.mousePressed();
-    // Switch to the FirstLvl state
     currentState = new FirstLvl();
   }
 }

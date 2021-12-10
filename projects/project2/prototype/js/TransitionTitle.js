@@ -1,29 +1,24 @@
-// Title
-// A state representing the Title of our program
-// Displays the title on the screen and switches to
-// Animation on a key press.
+/**
+Project 2
+Radhika Patel
 
-// NOTE: We extend the State class to guarantee this class will have
-// the key methods that we call in the main program,
-// draw() and keyPressed() in this case.
+A state representing the transition screen of the program
+Displays the text on the screen and switches the next level on mouseClick
+ **/
 class TransitionTitle extends State {
 
-  // constructor()
-  // Acts as the setup() of the state, called when the
-  // state is created. Sets the title of the program.
+// Sets the text of the state
   constructor() {
     // We should always call the superclass constructor
     // even if it doesn't do anything right now. It might
     // later!
     super();
 
-    // Set our property determining the title of the simulation
+    // Set our property determining the text of the state
     this.transitionTitleString = "You completed the level! Goodjob, on to the next one...";
   }
 
-  // draw()
-  // Called every frame in the main script. Handles what the title
-  // state needs to do each frame, which is display the title.
+// displays the text
   draw() {
     // Always call the super() version of the method if there is one
     // just in case it does something important.
@@ -40,7 +35,7 @@ class TransitionTitle extends State {
   }
 
   // displayTitle()
-  // Sets style and then display the title in the titleString property on the canvas
+  // Sets style and then display the text in the transitionTitleString property on the canvas
   displayTitles() {
     push();
     fill(255);
@@ -52,25 +47,9 @@ class TransitionTitle extends State {
 
   }
 
-  // keyPressed()
-  // Called by the main script when a key is pressed! Switches to the Animation state
+// Switches to the next level state
   mousePressed() {
-    // Always call the superclass version of the method in case it does something or will
     super.mousePressed();
-
-    // Switch to the animation state
-
-    // NOTE how we do not need to check if the state is title,
-    // because this class IS the title state
-
-    // NOTE that we switch states by changing what kind of state object is in
-    // the currentState variable from the main script. By putting a new Animation
-    // state object into it, the program will start using the Animation class to
-    // determine how to handle draw() and keyPressed()
-
-    // NOTE that creating a new Animation object like this automatically calls its
-    // constructor(), which therefore acts like setup(), called once when the state
-    // starts.
     currentState = new SecondLvl();
   }
 }

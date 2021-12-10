@@ -1,3 +1,9 @@
+/**
+Project 2
+Radhika Patel
+
+Creates the second level of the game by changing the possible card patterns and mking them more similar.
+*/
 
 
 class SecondLvl extends FirstLvl {

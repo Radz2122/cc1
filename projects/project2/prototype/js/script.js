@@ -1,28 +1,35 @@
+/**
+Project 2
+Radhika Patel
+
+Main Script
+Handles the main functions and a few assets
+**/
+
 // A variable to store the currently active state object (starts empty)
 let currentState;
+//stores the dog img
 let img;
+//stores the background music
 let backMusic;
-//to store array of peaks
+//stores array of peaks
 let peaks;
 
+// loads an img and a sound
   function preload(){
     //image source= https://www.pinterest.ca/pin/553520610445431813/
     img=loadImage('assets/images/dog.jpg');
 
     // sound source: https://www.youtube.com/watch?v=EUepTfZbEiQ
     backMusic = loadSound(`assets/sounds/gameOver.mp3`);
-
   }
 
-// setup()
-// Create the canvas, start our program in the title state, set default text style
+
+// start program in the title state, get audio peaks
 function setup() {
 
-  // We can set the current state by creating a NEW object from the class
-  // representing that state! This will call its constructor() which will work
-  // like the `setup()` for that state.
+  //new state for program, title
   currentState = new Title();
-
 
   //sound
   userStartAudio();
@@ -33,22 +40,12 @@ function setup() {
 // backMusic.setVolume(0.4);
 }
 
-// draw()
-// Simply call the draw method of the current state
+//calls the draw method of the current state
 function draw() {
-  // If the current state is Title this will call the Title class draw()
-  // If the current state is Animation this will call the Animation class draw()
-  // if the current state is Ending this will call the Ending class draw()
   currentState.draw();
 }
 
-// keyPressed()
-// Call the keyPressed method of the current state
-// Note how even if the specific state itself DOESN'T define a keyPressed() method this
-// will work because they all extend the State class which does have one. For instance
-// neither Animation nor Ending define a keyPressed() method, but this still works
-// because they INHERIT the one from the State class.
-
+// Call the mousePressed method of the current state
 function mousePressed(){
   currentState.mousePressed();
 }
